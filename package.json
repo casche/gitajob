@@ -1,8 +1,8 @@
 {
   "name": "gitajob",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Web scrapper to notify users of new jobs at Github!",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/casche/gitajob/issues"
   },
-  "homepage": "https://github.com/casche/gitajob"
+  "homepage": "https://github.com/casche/gitajob",
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "bower": "^1.4.1",
+    "cheerio": "latest",
+    "express": "latest",
+    "method-override": "^2.3.2",
+    "request": "latest"
+  }
 }

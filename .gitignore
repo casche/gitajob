@@ -1,0 +1,15 @@
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+
+## Directory-based project format:
+.idea/
+.DS_Store
+.nodemonignore
+.sass-cache/
+npm-debug.log
+node_modules/
+public/libs
+app/tests/coverage/
+.bower-*/
+.idea/

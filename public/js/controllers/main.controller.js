@@ -11,6 +11,7 @@ angular.module('app').controller('MainController', ['$scope', 'Scrapes', 'Subscr
 
     subscriber.$save(function(response) {
       $scope.submitted = true;
+      $scope.email = '';
     }, function(errorResponse) {
       $scope.error = errorResponse.data.message;
     });

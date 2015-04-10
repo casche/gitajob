@@ -1,0 +1,52 @@
+'use strict';
+
+var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var Jobs = require('../controllers/jobs.server.controller');
+var Scrapes = require('../controllers/scrapes.server.controller');
+var Parse = require('../controllers/jobparse.server.controller');
+var GithubService = require('../services/githubjobs.server.service');
+var mongoose = require('mongoose');
+
+mongoose.connect(config.db);
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
+var quit = function(err) {
+  var code = 0;
+  if (err) {
+    console.log(err);
+    code = 1;
+  }
+  process.exit(code);
+};
+
+var scrape = function () {
+  GithubService.getGithubJobsPage(function (error, html) {
+    if (error) {
+      quit(err);
+    }
+
+    if (!error) {
+      var numJobs = Parse.jobCount(html);
+      var c = 0;
+      Scrapes.create('https://github.com/about/jobs', numJobs);
+      Parse.getJobUrls(html, function(jobUrl) {
+        Jobs.jobExists(jobUrl, function (err, job) {
+          if (!err && job) {
+            Jobs.update(jobUrl);
+          } else if (!err && !job) {
+            GithubService.get(jobUrl, function (error, html) {
+              if (!error) Jobs.create(Parse.job(html));
+            });
+          }
+          c++;
+          // done yet?
+          if (c === numJobs) {
+            quit();
+          }
+        });
+      });
+    }
+  });
+};
+
+mongoose.connection.once('open', scrape);

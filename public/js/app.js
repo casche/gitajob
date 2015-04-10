@@ -1,1 +1,1 @@
-angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl']);
+angular.module('app', ['ngRoute', 'appRoutes', 'ngResource', '720kb.tooltips']);

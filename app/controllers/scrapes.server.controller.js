@@ -15,3 +15,15 @@ exports.create = function (url, count, done) {
     }
   });
 };
+
+exports.list = function(req, res) {
+  Scrape.find().sort('-created').exec(function(err, scrapes) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(scrapes);
+    }
+  });
+};

@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var glob = require("glob");
 var path = require('path');
 
+console.log("Connecting to " + config.db);
 mongoose.connect(config.db);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function (callback) {

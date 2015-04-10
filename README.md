@@ -1,3 +1,3 @@
 # Gitajob
 
-Are there jobs at Github? Yes!
+[Are there jobs at Github?](http://gitajob.ninja)

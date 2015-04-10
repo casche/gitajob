@@ -1,6 +1,23 @@
-<div style="padding:100px; margin-top: 100px" class="section text-center" data-ng-init="find()">
-  <div class="row">
+<div class="section text-center" data-ng-init="find()">
+  <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row">
     <h1><i class="fa fa-github fa-5x"></i></h1>
-    <h1>Last we checked, {{scrapes[0].created | date}}, there were <a href="{{scrapes[0].url}}">{{scrapes[0].count}} jobs</a> at Github</h1>
+
+    <h1>Last we checked, {{scrapes[0].created | date}}, there were <a href="{{scrapes[0].url}}">{{scrapes[0].count}}
+      jobs</a> at Github</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8  col-xs-offset-2 col-xs-8">
+      <form ng-hide="submitted === true" name="subscribe" role="form" novalidate ng-submit="submit()" style="margin-top:25px">
+        <div class="input-group">
+          <input id="mail" name="email" type="email" class="form-control" data-ng-model="email" placeholder="Email address"
+                 required/>
+            <span class="input-group-btn">
+              <button class="btn btn-success" ng-disabled="subscribe.$invalid" value="Submit" type="submit">Subscribe</button>
+            </span>
+        </div>
+      </form>
+      <h5 ng-show="submitted === true">We'll let you know when there are more</h5>
+      <h5 class="text-danger text-center">{{error}}</h5>
+    </div>
   </div>
 </div>

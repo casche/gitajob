@@ -9,6 +9,8 @@ body {
     background: -o-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
     background: -ms-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
     background: linear-gradient(to bottom, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .wrap {
@@ -31,4 +33,47 @@ html, body {
 
 .footer {
     height: 25px;
+}
+
+.btn-success {
+    background-color: rgba(19, 94, 225, 1);
+    border-color: rgba(15, 54, 143, 1);
+}
+
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+    background-color: rgba(19, 94, 225, 1) ;
+    border-color: rgba(19, 94, 225, 1) ;
+}
+
+.btn-success:hover {
+    background-color: rgba(19, 94, 225, 1) ;
+    border-color: rgba(19, 94, 225, 1) ;
+}
+
+.btn-success.disabled,
+.btn-success.disabled.active,
+.btn-success.disabled.focus,
+.btn-success.disabled:active,
+.btn-success.disabled:focus,
+.btn-success.disabled:hover,
+.btn-success[disabled],
+.btn-success[disabled].active,
+.btn-success[disabled].focus,
+.btn-success[disabled]:active,
+.btn-success[disabled]:focus,
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success,
+fieldset[disabled] .btn-success.active,
+fieldset[disabled] .btn-success.focus,
+fieldset[disabled] .btn-success:active,
+fieldset[disabled] .btn-success:focus,
+fieldset[disabled] .btn-success:hover  {
+    background-color: rgba(14, 45, 121, 1);
+    border-color: rgba(14, 45, 121, 1);
+}
+
+.text-danger {
+    color: #FFA700;
 }

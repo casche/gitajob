@@ -2,11 +2,11 @@
 
 'use strict';
 
-var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
-var Jobs = require('../controllers/jobs.server.controller');
-var Scrapes = require('../controllers/scrapes.server.controller');
-var Parse = require('../controllers/jobparse.server.controller');
-var GithubService = require('../services/githubjobs.server.service');
+var config = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var Jobs = require('../app/controllers/jobs.server.controller');
+var Scrapes = require('../app/controllers/scrapes.server.controller');
+var Parse = require('../app/controllers/jobparse.server.controller');
+var GithubService = require('../app/services/githubjobs.server.service');
 var mongoose = require('mongoose');
 
 mongoose.connect(config.db);

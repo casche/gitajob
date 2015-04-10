@@ -77,3 +77,7 @@ fieldset[disabled] .btn-success:hover  {
 .text-danger {
     color: #FFA700;
 }
+
+.text-success {
+    color: #70EE9B;
+}

@@ -4,6 +4,7 @@ angular.module('app').controller('MainController', ['$scope', 'Scrapes', 'Subscr
   };
 
   $scope.submit = function() {
+    $scope.error = '';
     var subscriber = new Subscribers ({
       email: $scope.email
     });

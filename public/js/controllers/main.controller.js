@@ -16,4 +16,5 @@ angular.module('app').controller('MainController', ['$scope', 'Scrapes', 'Subscr
       $scope.error = errorResponse.data.message;
     });
   };
+
 }]);

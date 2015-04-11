@@ -1,1 +1,1 @@
-angular.module('app', ['ngRoute', 'appRoutes', 'ngResource', '720kb.tooltips']);
+angular.module('app', ['ngRoute', 'appRoutes', 'ngResource', 'ui.bootstrap']);

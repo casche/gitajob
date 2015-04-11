@@ -81,3 +81,7 @@ fieldset[disabled] .btn-success:hover  {
 .text-success {
     color: #fff;
 }
+
+.tool {
+    color : #fff;
+}

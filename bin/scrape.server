@@ -37,7 +37,7 @@ var scrape = function () {
             Jobs.update(jobUrl);
           } else if (!err && !job) {
             GithubService.get(jobUrl, function (error, html) {
-              if (!error) Jobs.create(Parse.job(html));
+              if (!error) Jobs.create(Parse.job(jobUrl, html));
             });
           }
           c++;

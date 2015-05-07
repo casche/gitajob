@@ -15,7 +15,7 @@ exports.getJobUrls = function(html, each) {
   });
 };
 
-exports.job = function(html) {
+exports.job = function(jobUrl, html) {
   var $ = cheerio.load(html);
   return {
     url: jobUrl,

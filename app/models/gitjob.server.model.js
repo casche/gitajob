@@ -6,15 +6,18 @@ var mongoose = require('mongoose'),
 var gitjob = new Schema({
   location: {
     type: String,
-    default: ''
+    default: '',
+    trim: true
   },
   classification: {
     type: String,
-    default: ''
+    default: '',
+    trim: true
   },
   title: {
     type: String,
-    default: ''
+    default: '',
+    trim: true
   },
   url: {
     type: String,

@@ -22,7 +22,6 @@ exports.job = function(jobUrl, html) {
     location: (S($('div .inner .supertitle').text())).between('/').s,
     classification: (S($('div .inner .supertitle').text())).between('', '/').s,
     title: $('div .inner h1').text(),
-    firstSeen: Date.now,
-    lastSeen: Date.now
+    lastSeen: Date.now()
   };
 };

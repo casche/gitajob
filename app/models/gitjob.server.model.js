@@ -21,10 +21,12 @@ var gitjob = new Schema({
   },
   url: {
     type: String,
-    default: ''
+    default: '',
+    unique: true
   },
   firstSeen: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   lastSeen: {
     type: Date

@@ -3,11 +3,13 @@
 'use strict';
 
 var config = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
-var Jobs = require('../app/controllers/jobs.server.controller');
 var Scrapes = require('../app/controllers/scrapes.server.controller');
 var Parse = require('../app/controllers/jobparse.server.controller');
 var GithubService = require('../app/services/githubjobs.server.service');
-var mongoose = require('mongoose');
+require('../app/models/gitjob.server.model');
+
+var mongoose = require('mongoose'),
+  GitJob = mongoose.model('GitJob');
 
 mongoose.connect(config.db);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
@@ -38,20 +40,36 @@ var scrape = function () {
       var c = 0;
       Scrapes.create('https://github.com/about/jobs', numJobs);
       Parse.getJobUrls(html, function(jobUrl) {
-        Jobs.jobExists(jobUrl, function (err, job) {
-          if (!err && job) {
-            Jobs.update(jobUrl);
-          } else if (!err && !job) {
-            GithubService.get(jobUrl, function (error, html) {
-              if (!error) Jobs.create(Parse.job(jobUrl, html));
-            });
-          }
-          c++;
-          // done yet?
-          if (c === numJobs) {
-            // postProcess();
-            quit();
-          }
+        GithubService.get(jobUrl, function (error, html) {
+          GitJob.findOne({ url: jobUrl }, function(err, job) {
+              if (err) {
+                console.log (err);
+                quit();
+              } else {
+                if (!job) {
+                  new GitJob(Parse.job(jobUrl, html)).save(function(err) {
+                    if (err) {
+                      quit(err);
+                    }
+                    c++;
+                    if (c == numJobs) {
+                      quit();
+                    }
+                  });
+                } else {
+                  console.log('there is already a job');
+                  GitJob.update({ url: jobUrl}, { lastSeen: Date.now() }, function (err) {
+                    if (err) {
+                      quit(err);
+                    }
+                    c++;
+                    if (c == numJobs) {
+                      quit();
+                    }
+                  });
+                }
+              }
+          });
         });
       });
     }

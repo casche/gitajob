@@ -28,7 +28,7 @@
     "mailgun-js": "^0.6.9",
     "method-override": "^2.3.2",
     "mongoose": "^4.0.1",
-    "request": "latest",
+    "request": "2.54.0",
     "string": "^3.1.1"
   },
   "devDependencies": {

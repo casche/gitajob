@@ -1,4 +1,5 @@
 'use strict';
+
 var request = require('request');
 
 var get = function(url, done) {
@@ -6,6 +7,7 @@ var get = function(url, done) {
     done(error, html);
   });
 };
+
 exports.getGithubJobsPage = function(done) {
   get('https://github.com/about/jobs', done);
 };

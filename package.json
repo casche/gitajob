@@ -25,6 +25,7 @@
     "cron": "^1.0.9",
     "express": "^4.12.3",
     "glob": "^5.0.5",
+    "mailgun-js": "^0.6.9",
     "method-override": "^2.3.2",
     "mongoose": "^4.0.1",
     "request": "latest",

@@ -6,12 +6,14 @@ angular.module('app').controller('MainController', ['$scope', 'Scrapes', 'Subscr
   $scope.submit = function() {
     $scope.error = '';
     var subscriber = new Subscribers ({
-      email: $scope.email
+      address: $scope.address,
+      subscribed: true
     });
 
     subscriber.$save(function(response) {
+      $scope.subscribed = true;
+      $scope.address = '';
       $scope.submitted = true;
-      $scope.email = '';
     }, function(errorResponse) {
       $scope.error = errorResponse.data.message;
     });

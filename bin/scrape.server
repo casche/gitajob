@@ -21,10 +21,16 @@ var quit = function(err) {
   process.exit(code);
 };
 
+var postProcess = function(numJobs) {
+  Scrapes.find({}).sort('-created').exec(function(err, scrapes) {
+
+  });
+};
+
 var scrape = function () {
   GithubService.getGithubJobsPage(function (error, html) {
     if (error) {
-      quit(err);
+      quit(error);
     }
 
     if (!error) {
@@ -43,6 +49,7 @@ var scrape = function () {
           c++;
           // done yet?
           if (c === numJobs) {
+            // postProcess();
             quit();
           }
         });

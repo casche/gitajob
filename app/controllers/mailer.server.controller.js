@@ -6,7 +6,7 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 var subscriberlist = 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org';
 var ejs = require('ejs')
   ,fs = require('fs')
-  ,str = fs.readFileSync('../app/templates/newjob.server.template.ejs', 'utf8');
+  ,str = fs.readFileSync(__dirname + '/../templates/newjob.server.template.ejs', 'utf8');
 
 exports.emailJobs = function(jobs, quit) {
   var data = {

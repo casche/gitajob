@@ -7,7 +7,7 @@ var subscriberlist = 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.or
 var ejs = require('ejs'),
   fs = require('fs'),
   path = require('path'),
-  str = fs.readFileSync(path.join(process.cwd(), 'app/templates/newjob.server.template.ejs'), 'utf8');
+  str = fs.readFileSync('./app/templates/newjob.server.template.ejs', 'utf8');
 
 exports.emailJobs = function(jobs, quit) {
   var data = {

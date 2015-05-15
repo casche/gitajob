@@ -17,25 +17,30 @@ mongoose.connection.once('open', function (callback) {
   console.log('Boostraping');
   glob('./app/models/**/*.js', null, function(err, files){
     files.forEach(function(modelPath) {
-      console.log('loading '  + modelPath);
+      console.log('loading ' + modelPath);
       require(path.resolve(modelPath));
+    });
+  });
+  glob('./app/templates/*', null, function(err, files){
+    files.forEach(function(modelPath) {
+      console.log('template  ' + modelPath);
     });
   });
   glob('./app/controllers/**/*.js', null, function(err, files){
     files.forEach(function(modelPath) {
-      console.log('loading '  + modelPath);
+      console.log('loading ' + modelPath);
       require(path.resolve(modelPath));
     });
   });
   glob('./app/services/**/*.js', null, function(err, files){
     files.forEach(function(modelPath) {
-      console.log('loading '  + modelPath);
+      console.log('loading ' + modelPath);
       require(path.resolve(modelPath));
     });
   });
   glob('./app/routes/**/*.js', null, function(err, files){
     files.forEach(function(modelPath) {
-      console.log('loading '  + modelPath);
+      console.log('loading ' + modelPath);
       require(path.resolve(modelPath))(app);
     });
   });

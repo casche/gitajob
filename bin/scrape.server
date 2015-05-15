@@ -6,6 +6,8 @@ var config = require('../config/env/' + (process.env.NODE_ENV || 'development') 
 var Scrapes = require('../app/controllers/scrapes.server.controller');
 var Parse = require('../app/controllers/jobparse.server.controller');
 var GithubService = require('../app/services/githubjobs.server.service');
+var Mailer = require('../app/controllers/mailer.server.controller.js');
+
 require('../app/models/gitjob.server.model');
 
 var mongoose = require('mongoose'),
@@ -23,11 +25,20 @@ var quit = function(err) {
   process.exit(code);
 };
 
-var postProcess = function(numJobs) {
-  Scrapes.find({}).sort('-created').exec(function(err, scrapes) {
+var postProcess = function() {
+  if (jobQueueToEmail.length > 0) {
+    // Great there are new jobs let's email them
+    console.log('Horaaay New jobs!');
 
-  });
+    Mailer.emailJobs(jobQueueToEmail, quit);
+  } else {
+    // no jobs
+    console.log('No jobs');
+    quit();
+  }
 };
+
+var jobQueueToEmail = [];
 
 var scrape = function () {
   GithubService.getGithubJobsPage(function (error, html) {
@@ -47,24 +58,24 @@ var scrape = function () {
                 quit();
               } else {
                 if (!job) {
-                  new GitJob(Parse.job(jobUrl, html)).save(function(err) {
+                  new GitJob(Parse.job(jobUrl, html)).save(function(err, raw) {
                     if (err) {
                       quit(err);
                     }
+                    jobQueueToEmail.push(raw);
                     c++;
                     if (c == numJobs) {
-                      quit();
+                      postProcess();
                     }
                   });
                 } else {
-                  console.log('there is already a job');
                   GitJob.update({ url: jobUrl}, { lastSeen: Date.now() }, function (err) {
                     if (err) {
                       quit(err);
                     }
                     c++;
                     if (c == numJobs) {
-                      quit();
+                      postProcess();
                     }
                   });
                 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style="font-family: Helvetica, Arial, sans-serif;
+                font-weight: 300;">
+<a style="text-decoration: none;" target="_blank" href="http://gitajob.ninja">
+    <span style="color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 100px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">Gitajob</span>
+    <span style="color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center;">.ninja</span>
+</a>
+<hr><br>
+
+<p style="font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word;">We would just like to let you know that there are <%= jobs.length  %> new jobs at <a style="text-decoration: none;" target="_blank" href="http://github.com">Github</a>. Check them out:</p>
+<% if (jobs.length) { %>
+<ul style="list-style-type: none; font-size: 14px;line-height: 24px;">
+    <% jobs.forEach(function(job) { %>
+    <li><a href='<%= job.url %>'><%= job.title %></a></li>
+    <% }) %>
+</ul>
+<% } %>
+</body>
+</html>

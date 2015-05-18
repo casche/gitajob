@@ -49,7 +49,16 @@ mongoose.connection.once('open', function (callback) {
   app.use(bodyParser.json({type: 'application/vnd.api+json'}));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(methodOverride('X-HTTP-Method-Override'));
+  app.use(function(req, res, next) {
+    console.log(req.path);
+    if (req.path === '/unsubscribe') {
+      res.sendfile(__dirname + '/public/index.html');
+    } else {
+      next();
+    }
+  });
   app.use(express.static(__dirname + '/public'));
+
   app.listen(port);
 
   console.log('Magic happens on port ' + port);

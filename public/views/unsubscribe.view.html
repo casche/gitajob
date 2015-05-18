@@ -1,0 +1,23 @@
+<div class="section text-center">
+  <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row">
+    <h1><i class="fa fa-github fa-5x"></i></h1>
+    <h1>We're sad <i class="fa fa-frown-o"></i> you're leaving us.</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8  col-xs-offset-2 col-xs-8">
+      <form name="subscribe" role="form" novalidate ng-submit="submit()" style="margin-top:25px">
+        <div class="input-group">
+          <input tooltip="Unsubscribe from our mailing list." tooltip-trigger="focus" tooltip-placement="top" id="mail"
+                 name="email" type="email" ng-change="submitted = false" class="form-control" data-ng-model="address" placeholder="Email address"
+                 required/>
+            <span class="input-group-btn">
+              <button class="btn btn-danger" ng-disabled="subscribe.$invalid" value="Submit" type="submit">Unsubscribe</button>
+            </span>
+        </div>
+      </form>
+      <p style="margin-top: 24px" ng-show="unsubscribed" class="text-center">You have successfully unsubscribed. Would you like to <a ng-href="/">subscribe?</a></p>
+      <p style="margin-top: 24px" ng-show="error" class="text-danger text-center">{{error}}</p>
+      <p style="margin-top: 48px" class="text-center">Was there something you didn't like? <a target="_blank" href="https://github.com/casche/gitajob/issues/new">Let us know</a></p>
+    </div>
+  </div>
+</div>

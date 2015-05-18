@@ -8,15 +8,17 @@
     <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8  col-xs-offset-2 col-xs-8">
       <form name="subscribe" role="form" novalidate ng-submit="submit()" style="margin-top:25px">
         <div class="input-group">
-          <input tooltip="Get notified when there are new jobs." tooltip-trigger="focus" tooltip-placement="bottom" id="mail" name="email" type="email" ng-change="submitted = false" class="form-control" data-ng-model="address" placeholder="Email address"
+          <input tooltip="Get notified when there are new jobs." tooltip-trigger="focus" tooltip-placement="top" id="mail" name="email" type="email" ng-change="submitted = false" class="form-control" data-ng-model="address" placeholder="Email address"
                  required/>
             <span class="input-group-btn">
               <button class="btn btn-success" ng-disabled="subscribe.$invalid" value="Submit" type="submit">Subscribe</button>
             </span>
         </div>
       </form>
-      <p style="margin-top: 24px" ng-show="submitted" class="text-success text-center" >Cool. Sit back, relax. We'll let you know when there are more jobs @ Github!</p>
+      <p style="margin-top: 24px" ng-show="submitted" class="text-center" >Cool. Sit back, relax. We'll let you know when there are more jobs @ Github!</p>
       <p style="margin-top: 24px" ng-show="error" class="text-danger text-center">{{error}}.</p>
+      <p style="margin-top: 48px">Would you like to <a ng-href="/unsubscribe">unsubscribe</a>?</p>
+
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ body {
     min-height: 100%;
     height: auto;
     /* Negative indent footer by its height */
-    margin: 0 auto -50px;
+    margin: 0 auto -75px;
     /* Pad bottom by footer height */
     padding: 0 0 50px;
 }
@@ -32,7 +32,8 @@ html, body {
 }
 
 .footer {
-    height: 25px;
+    height: 100px;
+    margin-top: 24px;
 }
 
 .btn-success {

@@ -1,9 +1,7 @@
 'user strict';
 
-var api_key = 'key-55d354fbcfb543701253c20dce76c0b9';
-var domain = 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org';
-var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-var subscriberlist = 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org';
+var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var mailgun = require('mailgun-js')({apiKey: config.mailer.apiKey, domain: config.mailer.domain});
 var ejs = require('ejs'),
   fs = require('fs'),
   path = require('path'),
@@ -11,11 +9,12 @@ var ejs = require('ejs'),
 
 exports.emailJobs = function(jobs, quit) {
   var data = {
-    from: 'Gitajob <subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org>',
-    to: 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
-    subject: 'There are ' + jobs.length + ' new jobs at Github',
+    from: config.mailer.from,
+    to: config.mailer.subscriberList,
+    subject: 'There ' + jobs.length > 1 ? 'are ' : 'is ' +  jobs.length + ' new job' + jobs.length > 1 ? 's ' : '' +  ' at Github',
     html: ejs.render(str, { jobs: jobs })
   };
+  console.log ('Sending mail to ' + config.mailer.subscriberList);
   mailgun.messages().send(data, function (error, body) {
     error ? quit(error) : quit();
   });

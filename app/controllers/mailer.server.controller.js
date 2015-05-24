@@ -11,9 +11,10 @@ exports.emailJobs = function(jobs, quit) {
   var data = {
     from: config.mailer.from,
     to: config.mailer.subscriberList,
-    subject: 'There ' + jobs.length > 1 ? 'are ' : 'is ' +  jobs.length + ' new job' + jobs.length > 1 ? 's ' : '' +  ' at Github',
+    subject: 'There ' + (jobs.length > 1 ? 'are ' : 'is ') +  jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +  ' at Github',
     html: ejs.render(str, { jobs: jobs })
   };
+  console.log('There ' + (jobs.length > 1 ? 'are ' : 'is ') +  jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +  ' at Github');
   console.log ('Sending mail to ' + config.mailer.subscriberList);
   mailgun.messages().send(data, function (error, body) {
     error ? quit(error) : quit();

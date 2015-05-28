@@ -3,13 +3,14 @@
 module.exports = {
   db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/gitajob',
   mailer: {
-    from: process.env.MAILER_FROM || 'MAILER_FROM',
-    options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
-      auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
-      }
+    apiKey: 'key-55d354fbcfb543701253c20dce76c0b9',
+    domain: 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
+    subscriberList: 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
+    from: 'Gitajob <subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org>'
+  },
+  scrapes : {
+    github : {
+      url : 'https://github.com/about/jobs'
     }
   }
 };

@@ -7,5 +7,10 @@ module.exports = {
     domain: 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
     subscriberList: 'development@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
     from: 'Gitajob <development@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org>'
+  },
+  scrapes : {
+    github : {
+      url : 'https://github.com/about/jobs'
+    }
   }
 };

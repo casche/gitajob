@@ -4,7 +4,7 @@
 
 var config = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
 var Scrapes = require('../app/controllers/scrapes.server.controller');
-var Parse = require('../app/controllers/jobparse.server.controller');
+var Parse = require('./github/parse.service.js');
 var GithubService = require('../app/services/githubjobs.server.service');
 var Mailer = require('../app/controllers/mailer.server.controller.js');
 
@@ -50,7 +50,7 @@ var scrape = function() {
       var numJobs = Parse.jobCount(html);
       var c = 0;
       Scrapes.create('https://github.com/about/jobs', numJobs);
-      Parse.getJobUrls(html, function(jobUrl) {
+      Parse.getJobUrls(html).forEach(function(jobUrl) {
         GithubService.get(jobUrl, function(error, html) {
           GitJob.findOne({
             url: jobUrl

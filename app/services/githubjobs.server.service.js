@@ -8,7 +8,7 @@ var get = function(url, done) {
   });
 };
 
-exports.getGithubJobsPage = function(done) {
+exports.getGitHubJobsPage = function(done) {
   get('https://github.com/about/jobs', done);
 };
 

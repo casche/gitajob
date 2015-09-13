@@ -3,7 +3,7 @@
 var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
 
 exports.scrape = function(done) {
-  GithubService.getGithubJobsPage(function (error, html) {
+  GithubService.getGitHubJobsPage(function (error, html) {
     if (error) {
       quit(error);
     }

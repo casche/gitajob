@@ -10,7 +10,7 @@ exports.jobCount = function(html) {
 
 exports.getJobUrls = function(html, each) {
   var $ = cheerio.load(html);
-  $('div .jobs-open-positions li a').each(function () {
+  $('div .jobs-open-positions li a').each(function() {
     each($(this).attr('href'))
   });
 };
@@ -19,9 +19,9 @@ exports.job = function(jobUrl, html) {
   var $ = cheerio.load(html);
   return {
     url: jobUrl,
-    location: (S($('div .inner .supertitle').text())).between('/').s,
-    classification: (S($('div .inner .supertitle').text())).between('', '/').s,
-    title: $('div .inner h1').text(),
+    title: $('.posting-headline h2').text(),
+    location: $('.posting-headline .posting-categories .sort-by-time').text(),
+    classification: $('.posting-headline .posting-categories .sort-by-commitment').text(),
     lastSeen: Date.now()
   };
 };

@@ -2,95 +2,18 @@
 
 'use strict';
 
-var config = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
-var Scrapes = require('../app/controllers/scrapes.server.controller');
-var Parse = require('./github/parse.service.js');
-var GithubService = require('../app/services/githubjobs.server.service');
+var C = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var M = require('mongoose');
+var GitHubJobSite = require('./github/github.jobsite.js');
+var GitHubJobs = require('./github/github.jobs.js');
 var Mailer = require('../app/controllers/mailer.server.controller.js');
 
-require('../app/models/gitjob.server.model');
-
-var mongoose = require('mongoose'),
-  GitJob = mongoose.model('GitJob');
-
-mongoose.connect(config.db);
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-
-var quit = function(err) {
-  var code = 0;
-  if (err) {
-    console.log(err);
-    code = 1;
-  }
-  process.exit(code);
-};
-
-var postProcess = function() {
-  if (jobQueueToEmail.length > 0) {
-    // Great there are new jobs let's email them
-    console.log('Horaaay New jobs!');
-
-    Mailer.emailJobs(jobQueueToEmail, quit);
-  } else {
-    // no jobs
-    console.log('No jobs');
-    quit();
-  }
-};
-
-var jobQueueToEmail = [];
-
-var scrape = function() {
-  GithubService.getGitHubJobsPage(function(error, html) {
-    if (error) {
-      quit(error);
-    }
-
-    if (!error) {
-      var numJobs = Parse.jobCount(html);
-      var c = 0;
-      Scrapes.create('https://github.com/about/jobs', numJobs);
-      Parse.getJobUrls(html).forEach(function(jobUrl) {
-        GithubService.get(jobUrl, function(error, html) {
-          GitJob.findOne({
-            url: jobUrl
-          }, function(err, job) {
-            if (err) {
-              console.log(err);
-              quit();
-            } else {
-              if (!job) {
-                new GitJob(Parse.job(jobUrl, html)).save(function(err, raw) {
-                  if (err) {
-                    quit(err);
-                  }
-                  jobQueueToEmail.push(raw);
-                  c++;
-                  if (c == numJobs) {
-                    postProcess();
-                  }
-                });
-              } else {
-                GitJob.update({
-                  url: jobUrl
-                }, {
-                  lastSeen: Date.now()
-                }, function(err) {
-                  if (err) {
-                    quit(err);
-                  }
-                  c++;
-                  if (c == numJobs) {
-                    postProcess();
-                  }
-                });
-              }
-            }
-          });
-        });
-      });
-    }
-  });
-};
-
-mongoose.connection.once('open', scrape);
+M.connect(C.db);
+M.connection.on('error', console.error.bind(console, 'connection error:'));
+M.connection.once('open', function() {
+  GitHubJobSite.html(C.jobUrl)
+    .then(GitHubJobs.getJobs)
+    .then(GitHubJobs.resolveExistence)
+    .then(GitHubJobs.updateJobs)
+    .then(Mailer.emailJobs);
+});

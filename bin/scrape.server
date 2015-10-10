@@ -15,5 +15,10 @@ M.connection.once('open', function() {
     .then(GitHubJobs.getJobs)
     .then(GitHubJobs.resolveExistence)
     .then(GitHubJobs.updateJobs)
-    .then(Mailer.emailJobs);
+    .then(Mailer.emailJobs)
+    .then(function() {
+      // And he piled upon the whale's white hump the sum of all the rage and hate felt by his whole race.
+      // If his chest had been a cannon, he would have shot his heart upon it.
+      M.connection.close();
+    });
 });

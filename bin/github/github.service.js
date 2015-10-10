@@ -3,7 +3,7 @@
 var request = require('request');
 
 var get = function(url, done) {
-  request(url, function (error, response, html) {
+  request(url, function(error, response, html) {
     done(error, html);
   });
 };

@@ -1,15 +1,15 @@
 'use strict';
-require('../models/scrape.server.model')
+require('../models/scrape.server.model');
 
-var mongoose = require('mongoose'),
-  Scrape = mongoose.model('Scrape');
+var mongoose = require('mongoose');
+var Scrape = mongoose.model('Scrape');
 
-exports.create = function (url, count, done) {
+exports.create = function(url, count, done) {
   var newScrape = new Scrape();
   newScrape.url = url;
   newScrape.count = count;
 
-  newScrape.save(function (err) {
+  newScrape.save(function(err) {
     if (done) {
       done(err, newScrape);
     }

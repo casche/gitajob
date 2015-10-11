@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
   server: {
-    localport: 1337,
+    localport: 8080,
     db: process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/gitajob',
     controller: [
       path.resolve(__dirname, '../../app/controllers/*.js')

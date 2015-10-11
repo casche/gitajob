@@ -17,10 +17,10 @@ module.exports = {
       path.resolve(__dirname, '../../app/models/*.js')
     ],
     mailer: {
-      apiKey: 'key-55d354fbcfb543701253c20dce76c0b9',
-      domain: 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
-      subscriberList: 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
-      from: 'Gitajob <subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org>'
+      apiKey: process.env.MAILGUN_API_KEY || 'key-55d354fbcfb543701253c20dce76c0b9',
+      domain: process.env.MAILGUN_DOMAIN || 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
+      subscriberList: process.env.SUB_LIST || 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org',
+      from: process.env.SUB_FROM || 'Gitajob <subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org>'
     },
     jobUrl: 'https://github.com/about/jobs'
   }

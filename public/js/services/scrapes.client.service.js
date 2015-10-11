@@ -1,3 +1,4 @@
+/* global angular */
 'use strict';
 
 angular.module('app').factory('Scrapes', ['$resource',

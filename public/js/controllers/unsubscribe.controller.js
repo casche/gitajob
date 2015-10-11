@@ -1,3 +1,4 @@
+/* global angular */
 angular.module('app')
   .controller('UnsubscribeController', ['$scope', 'Subscribers', function($scope, Subscribers) {
     $scope.error = null;

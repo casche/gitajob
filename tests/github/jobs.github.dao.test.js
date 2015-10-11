@@ -1,9 +1,7 @@
 /* global describe, it */
-/* eslint max-nested-callbacks: false*/
 
 var Job = require('../../bin/github/jobs.github.dao.js');
 var chai = require('chai');
-var expect = chai.expect;
 chai.should();
 var sinon = require('sinon');
 var mongoose = require('mongoose');

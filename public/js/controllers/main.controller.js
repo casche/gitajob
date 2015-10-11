@@ -1,3 +1,4 @@
+/* global angular */
 angular.module('app')
   .controller('MainController', ['$scope', 'Scrapes', 'Subscribers', function($scope, Scrapes, Subscribers) {
     $scope.find = function() {

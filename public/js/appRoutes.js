@@ -1,3 +1,4 @@
+/* global angular */
 angular.module('appRoutes', [])
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 

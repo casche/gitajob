@@ -1,7 +1,7 @@
 require('../../app/models/gitjob.server.model');
 var Parse = require('./parse.service.js');
 var mongoose = require('mongoose');
-var GitHubJob = mongoose.model('GitJob');
+var gitHubJob = mongoose.model('GitJob');
 var Q = require('q');
 
 module.exports = (function() {
@@ -9,7 +9,7 @@ module.exports = (function() {
   return {
     exists: function(obj) {
       var d = Q.defer();
-      GitHubJob.findOne({
+      gitHubJob.findOne({
         url: obj.url
       }, function(err, job) {
         var j = {
@@ -31,11 +31,11 @@ module.exports = (function() {
     },
 
     create: function(obj) {
-      return GitHubJob(Parse.job(obj.url, obj.html)).save();
+      return gitHubJob(Parse.job(obj.url, obj.html)).save();
     },
 
     update: function(jobUrl) {
-      return GitHubJob.update({
+      return gitHubJob.update({
         url: jobUrl
       }, {
         lastSeen: Date.now()

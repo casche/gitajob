@@ -1,67 +1,65 @@
-// server.js
-
 var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var port = process.env.PORT || 8080;
+var colors = require('colors');
 var config = require('./config/env/' + (process.env.NODE_ENV || 'development') + '.js');
-var mongoose = require('mongoose');
-var glob = require("glob");
-var path = require('path');
+var glob = require('glob');
+var async = require('async');
+var http = require('http');
 
-console.log("Connecting to " + config.db);
-mongoose.connect(config.db);
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function (callback) {
-  console.log('Boostraping');
-  glob('./app/models/**/*.js', null, function(err, files){
-    files.forEach(function(modelPath) {
-      console.log('loading ' + modelPath);
-      require(path.resolve(modelPath));
-    });
-  });
-  glob('./app/templates/*', null, function(err, files){
-    files.forEach(function(modelPath) {
-      console.log('template  ' + modelPath);
-    });
-  });
-  glob('./app/controllers/**/*.js', null, function(err, files){
-    files.forEach(function(modelPath) {
-      console.log('loading ' + modelPath);
-      require(path.resolve(modelPath));
-    });
-  });
-  glob('./app/services/**/*.js', null, function(err, files){
-    files.forEach(function(modelPath) {
-      console.log('loading ' + modelPath);
-      require(path.resolve(modelPath));
-    });
-  });
-  glob('./app/routes/**/*.js', null, function(err, files){
-    files.forEach(function(modelPath) {
-      console.log('loading ' + modelPath);
-      require(path.resolve(modelPath))(app);
-    });
-  });
+var app = express();
+app.use(require('body-parser').json());
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.json({type: 'application/vnd.api+json'}));
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(methodOverride('X-HTTP-Method-Override'));
-  app.use(function(req, res, next) {
-    console.log(req.path);
-    if (req.path === '/unsubscribe') {
-      res.sendfile(__dirname + '/public/index.html');
-    } else {
-      next();
-    }
-  });
-  app.use(express.static(__dirname + '/public'));
+async.series([
+  function(cb) {
+    config.server.static.app.forEach(function(p) {
+      console.log('✓ Serving static files from '.bold.green + p);
+      app.use('/', express.static(p));
+    });
 
-  app.listen(port);
+    config.server.static.lib.forEach(function(p) {
+      console.log('✓ Serving libraries files from '.bold.green + p);
+      app.use('/', express.static(p));
+    });
 
-  console.log('Magic happens on port ' + port);
-  exports = module.exports = app;
-});
+    cb();
+  },
 
+  function(cb) {
+    var mongoose = require('mongoose');
+    mongoose.connect(config.server.db, {
+      server: {
+        socketOptions: {
+          keepAlive: 1
+        }
+      }
+    });
+
+    async.eachSeries(config.server.documents, function(p, cb) {
+      glob(p, function(err, file) {
+        if (file && file.length) {
+          file.forEach(function(f) {
+            console.log('✓ Using model '.bold.green + f);
+            require(f);
+          });
+          cb();
+        }
+      });
+    }, cb);
+  },
+
+  function(cb) {
+    async.eachSeries(config.server.controller, function(p, cb) {
+      glob(p, function(err, files) {
+        if (files && files.length) {
+          files.forEach(function(f) {
+            console.log('✓ Using controller '.bold.green + f);
+            app.use('/', require(f));
+          });
+        }
+        cb();
+      });
+    }, cb);
+  }
+]);
+
+console.log('Rocking out on port %d', config.server.localport);
+http.createServer(app).listen(config.server.localport);

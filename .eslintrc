@@ -1,12 +1,6 @@
 {
 	"env": {
-		"browser": true
-	},
-	"globals": {
-		"sap": true,
-		"$": true,
-		"com": true,
-		"jQuery": true
+		"node": true
 	},
 	"rules": {
 		"block-scoped-var": 1,
@@ -35,7 +29,7 @@
 		"no-unused-expressions": 1,
 		"no-use-before-define": [1, "nofunc"],
 		"no-warning-comments": 1,
-		"strict": 1,
+		"strict": 0,
 		"valid-jsdoc": [1, {
 			"requireReturn": false
 		}],

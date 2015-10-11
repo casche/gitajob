@@ -1,29 +1,8 @@
 'use strict';
-require('../models/scrape.server.model')
+var Scrapes = require('../services/scrapes.server.service');
+var express = require('express');
+var router = express.Router();
 
-var mongoose = require('mongoose'),
-  Scrape = mongoose.model('Scrape');
+router.all('/scrapes', Scrapes.list);
 
-exports.create = function (url, count, done) {
-  var newScrape = new Scrape();
-  newScrape.url = url;
-  newScrape.count = count;
-
-  newScrape.save(function (err) {
-    if (done) {
-      done(err, newScrape);
-    }
-  });
-};
-
-exports.list = function(req, res) {
-  Scrape.find({}).sort('-created').exec(function(err, scrapes) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(scrapes);
-    }
-  });
-};
+module.exports = router;

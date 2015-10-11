@@ -1,3 +1,3 @@
-angular.module('app').controller('FooterController', ['$scope', '$location', function ($scope, $location) {
+/* global angular */
 
-}]);
+angular.module('app').controller('FooterController', ['$scope', '$location', function($scope, $location) {}]);

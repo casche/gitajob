@@ -1,15 +1,12 @@
 'use strict';
-
-var apiKey = 'key-55d354fbcfb543701253c20dce76c0b9';
-var domain = 'app552b0f23610b46bbaa83fc1579d92b51.mailgun.org';
+var config = require('./config/env/' + (process.env.NODE_ENV || 'development') + '.js');
 var mailgun = require('mailgun-js')({
-  apiKey: apiKey,
-  domain: domain
+  apiKey: config.server.mailer.apiKey,
+  domain: config.server.mailer.domain
 });
-var subscriberlist = 'subscribers@app552b0f23610b46bbaa83fc1579d92b51.mailgun.org';
 
 exports.update = function(req, res) {
-  var list = mailgun.lists(subscriberlist);
+  var list = mailgun.lists(config.server.mailer.subscriberList);
 
   if (!list) {
     return res.status(400).send({});

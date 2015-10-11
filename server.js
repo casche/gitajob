@@ -61,4 +61,5 @@ async.series([
   }
 ]);
 
+console.log('Rocking out on port %d', config.server.localport);
 http.createServer(app).listen(config.server.localport);

@@ -1,5 +1,5 @@
 'use strict';
-var config = require('./config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
 var mailgun = require('mailgun-js')({
   apiKey: config.server.mailer.apiKey,
   domain: config.server.mailer.domain

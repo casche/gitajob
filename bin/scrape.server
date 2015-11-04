@@ -6,7 +6,7 @@ var C = require('../config/env/' + (process.env.NODE_ENV || 'development') + '.j
 var M = require('mongoose');
 var GitHubJobSite = require('./github/github.jobsite.js');
 var GitHubJobs = require('./github/github.jobs.js');
-var Mailer = require('../app/controllers/mailer.server.controller.js');
+var Mailer = require('../app/services/mailer.server.service.js');
 
 M.connect(C.db);
 M.connection.on('error', console.error.bind(console, 'connection error:'));

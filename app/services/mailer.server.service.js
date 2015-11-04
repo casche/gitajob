@@ -1,6 +1,6 @@
 'user strict';
 
-var config = require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js');
+var config = (require('../../config/env/' + (process.env.NODE_ENV || 'development') + '.js')).server;
 var ejs = require('ejs');
 var fs = require('fs');
 var str = fs.readFileSync('./app/templates/newJob.server.template.ejs', 'utf8');

@@ -10,18 +10,22 @@ var mailgun = require('mailgun-js')({
 });
 
 exports.emailJobs = function(jobs) {
-  var data = {
-    from: config.server.mailer.from,
-    to: config.server.mailer.subscriberList,
-    subject: 'There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +
-      ' at Github',
-    html: ejs.render(str, {
-      jobs: jobs
-    })
-  };
-  console.log('There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +
-    ' at Github');
-  console.log(config);
-  console.log('Sending mail to ' + config.server.mailer.subscriberList);
-  mailgun.messages().send(data, function(error, body) {});
+  if (jobs && jobs.length > 0) {
+    var data = {
+      from: config.server.mailer.from,
+      to: config.server.mailer.subscriberList,
+      subject: 'There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +
+        ' at Github',
+      html: ejs.render(str, {
+        jobs: jobs
+      })
+    };
+    console.log('There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +
+      ' at Github');
+    console.log(config);
+    console.log('Sending mail to ' + config.server.mailer.subscriberList);
+    mailgun.messages().send(data, function(error, body) {});
+  } else {
+    console.log('No jobs :(');
+  }
 };

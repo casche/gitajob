@@ -14,7 +14,6 @@ var someJobs = [{
   }
 ];
 
-
 describe('Mailer service', function() {
 
   it('Should not mail jobs if no new jobs are found', function() {

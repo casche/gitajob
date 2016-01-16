@@ -28,7 +28,7 @@ gulp.task('style', function() {
 });
 
 gulp.task('test', function() {
-  return gulp.src(['tests/*/**.js'], {
+  return gulp.src(['tests/**.js'], {
     read: false
   }).pipe(mocha({
     reporter: 'nyan'

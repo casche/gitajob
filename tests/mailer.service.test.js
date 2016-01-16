@@ -1,6 +1,5 @@
 var chai = require('chai');
 var sinon = require('sinon');
-var mongoose = require('mongoose');
 var rewire = require('rewire');
 var mailer = rewire(__dirname + '/../app/services/mailer.server.service.js');
 var expect = chai.expect;

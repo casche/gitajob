@@ -1,20 +1,47 @@
 var chai = require('chai');
-chai.should();
 var sinon = require('sinon');
 var mongoose = require('mongoose');
-var mailer = require(__dirname + '/../app/services/mailer.server.service.js');
+var rewire = require('rewire');
+var mailer = rewire(__dirname + '/../app/services/mailer.server.service.js');
+var expect = chai.expect;
+
+var someJobs = [{
+    title: 'R2D2'
+  }, {
+    title: 'C3PO'
+  }, {
+    title: 'BB8'
+  }
+];
+
 
 describe('Mailer service', function() {
-  var sandbox;
-    
-  beforeEach(function () {
-      sandbox = sinon.sandbox.create();
+
+  it('Should not mail jobs if no new jobs are found', function() {
+    var spy = sinon.spy();
+    mailer.__set__('mailgun', {
+      messages: function() {
+        return {
+          send: spy
+        };
+      }
+    });
+
+    mailer.emailJobs([]);
+    expect(spy.called).to.equal(false);
   });
 
-  afterEach(function () {
-      sandbox.restore();
-  });
+  it('Should email jobs if they exist', function() {
+    var spy = sinon.spy();
+    mailer.__set__('mailgun', {
+      messages: function() {
+        return {
+          send: spy
+        };
+      }
+    });
 
-  describe('Should mail jobs if any exist', function() {
+    mailer.emailJobs(someJobs);
+    expect(spy.called).to.equal(true);
   });
 });

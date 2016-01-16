@@ -22,7 +22,6 @@ exports.emailJobs = function(jobs) {
     };
     console.log('There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length + ' new job' + (jobs.length > 1 ? 's' : '') +
       ' at Github');
-    console.log(config);
     console.log('Sending mail to ' + config.server.mailer.subscriberList);
     mailgun.messages().send(data, function(error, body) {});
   } else {

@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "chartist": "^0.9.5",
     "expect": "^1.6.0",
     "expect.js": "^0.3.1",
     "gulp": "^3.9.0",

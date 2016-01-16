@@ -86,3 +86,21 @@ fieldset[disabled] .btn-success:hover  {
 .tool {
     color : #fff;
 }
+
+.ct-grid {
+  stroke: white;
+}
+
+.ct-label {
+  color: white;
+}
+
+.ct-series-a .ct-line {
+  stroke: #6de3fa;
+  stroke-width: 5px;
+}
+
+.ct-series-a .ct-point {
+  stroke: #6de3fa;
+  stroke-width: 20px;
+}

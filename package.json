@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "postinstall": "bower install",
-    "test": "mocha tests/**/*.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",

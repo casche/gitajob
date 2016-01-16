@@ -31,7 +31,7 @@ exports.emailJobs = function(jobs) {
   if (hasJobs(jobs)) {
     mailJobs(jobs, 'There ' + (jobs.length > 1 ? 'are ' : 'is ') + jobs.length +
       ' new job' + (jobs.length > 1 ? 's' : '') +
-      ' at Github')
+      ' at Github');
   } else {
     console.log('No jobs :(');
   }

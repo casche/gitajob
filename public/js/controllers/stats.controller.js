@@ -67,4 +67,9 @@ angular.module('app')
         donut: true
       });
     });
+
+    $http.get('gitjobs/lifespan/list').then(function(response) {
+      $scope.oldest = response.data[0].title;
+      $scope.oldestAge = moment.duration(response.data[0].lifespan, "milliseconds").format("D[d]");
+    });
 }]);

@@ -152,3 +152,19 @@ exports.aggregateCount = function(req, res) {
       });
   }
 };
+
+exports.aggregateList = function(req, res) {
+  res.set('Content-Type', 'application/json');
+  var a = req.params.aggregate;
+  if (a === 'lifespan') {
+    GitJob
+      .aggregate( [ { $project: { title: 1, lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } }, { $sort : { lifespan: -1}}  ] )
+      .exec(function(err, result) {
+        if (err) {
+          return res.status(400).send({});
+        } else {
+          res.jsonp(result);
+        }
+      });
+  }
+}

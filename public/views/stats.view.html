@@ -10,7 +10,7 @@
           Average # of jobs available per day
         </div>
         <div class="panel-body text-center">
-          <h1 class="panel-title text-center">{{averageScrapes[0].count | number: 0}}</h1>
+          <h1 class="text-center">{{averageScrapes[0].count | number: 0}}</h1>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           Most jobs are posted on
         </div>
         <div class="panel-body text-center">
-          <h1 class="panel-title text-center">{{averageScrapesDayOfWeek[0]._id.dayOfWeek | date: 'EEEE'}}'s</h1>
+          <h1 class="text-center">{{averageScrapesDayOfWeek[0]._id.dayOfWeek | date: 'EEEE'}}'s</h1>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
           # of GitHub job crawls
         </div>
         <div class="panel-body text-center">
-          <h1 class="panel-title text-center">{{scrapes.length}}</h1>
+          <h1 class="text-center">{{scrapes.length}}</h1>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
           Average lifespan of an open job
         </div>
         <div class="panel-body text-center">
-          <h1 class="panel-title text-center">{{averageLifespan}}</h1>
+          <h1 class="text-center">{{averageLifespan}}</h1>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
           Average lifespan of an open Engineering job
         </div>
         <div class="panel-body text-center">
-          <h1 class="panel-title text-center">{{engineerlifespan}}</h1>
+          <h1 class="text-center">{{engineerlifespan}}</h1>
         </div>
       </div>
     </div>
@@ -73,6 +73,14 @@
       <div id="ct-pie" class="ct-perfect-fourth"></div>
     </div>
     <div class="col-md-4">
+      <div class="panel status panel-default panel-transparent">
+        <div class="panel-heading">
+          Longest living job, {{oldestAge}}
+        </div>
+        <div class="panel-body text-center">
+          <h1 class=" text-center">{{oldest}}</h1>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <h1>Engineering Jobs</h1>

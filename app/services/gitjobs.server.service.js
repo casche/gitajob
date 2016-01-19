@@ -53,7 +53,7 @@ exports.aggregate = function(req, res) {
     GitJob.aggregate([
       { $match: { title: /.*Engineer*/}},
       { $project: { lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } },
-      { $group: { _id : null, averageLifespan: { $avg: "$lifespan" }}} 
+      { $group: { _id : null, averageLifespan: { $avg: "$lifespan" }}}
     ]).exec(function(err, result) {
       if (err) {
         return res.status(400).send({});
@@ -96,5 +96,35 @@ exports.chart = function(req, res) {
          res.jsonp(scrapes);
        }
      });
+  }
+};
+
+exports.aggregateCount = function(req, res) {
+  res.set('Content-Type', 'application/json');
+  var a = req.params.aggregate;
+  if (a === 'remote') {
+    GitJob
+      .aggregate([
+        { $match: { $or: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]} },
+        { $group : { _id: null, count: { $sum: 1 }} }])
+      .exec(function(err, result) {
+        if (err) {
+          return res.status(400).send({});
+        } else {
+          res.jsonp(result);
+        }
+      });
+  } else if (a === 'notremote') {
+    GitJob
+      .aggregate([
+        { $match: { $nor: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]} },
+        { $group : { _id: null, count: { $sum: 1 }} }])
+      .exec(function(err, result) {
+        if (err) {
+          return res.status(400).send({});
+        } else {
+          res.jsonp(result);
+        }
+      });
   }
 };

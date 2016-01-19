@@ -6,5 +6,6 @@ var router = express.Router();
 router.all('/gitjobs', Gitjobs.list);
 router.all('/gitjobs/:aggregate', Gitjobs.aggregate);
 router.all('/gitjobs/:aggregate/chart', Gitjobs.chart);
+router.all('/gitjobs/:aggregate/count', Gitjobs.aggregateCount);
 
 module.exports = router;

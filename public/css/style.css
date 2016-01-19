@@ -133,3 +133,15 @@ fieldset[disabled] .btn-success:hover  {
 .panel-default .panel-heading {
   color: white;
 }
+
+.one {
+  padding: 50px;
+}
+
+.two {
+padding: 50px;
+}
+
+.three {
+  padding: 50px;
+}

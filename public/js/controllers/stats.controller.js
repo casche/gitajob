@@ -51,11 +51,8 @@ angular.module('app')
     $http.get('gitjobs/engineerlifespan').then(function(response) {
       $scope.engineerlifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
     });
-
-    var remoteCount = $http.get('gitjobs/remote/count');
-    var notRemoteCount =  $http.get('gitjobs/notremote/count');
-
-    Q.all([remoteCount, notRemoteCount]).then(function(data) {
+    
+    Q.all([$http.get('gitjobs/remote/count'), $http.get('gitjobs/notremote/count')]).then(function(data) {
       new Chartist.Pie('#ct-pie', {
         labels: ['Remote', 'Not Remote'],
         series: [data[0].data[0].count, data[1].data[0].count]

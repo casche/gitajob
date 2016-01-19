@@ -3,6 +3,6 @@
 
 angular.module('app').factory('Scrapes', ['$resource',
   function($resource) {
-    return $resource('Scrapes');
+    return $resource('scrapes');
   }
 ]);

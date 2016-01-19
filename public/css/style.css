@@ -1,56 +1,56 @@
 body {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 200;
-    color: #fff;
-    background: rgba(14, 45, 121, 1);
-    background: -moz-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(14, 45, 121, 1)), color-stop(21%, rgba(19, 94, 225, 1)), color-stop(51%, rgba(25, 90, 216, 1)), color-stop(76%, rgba(33, 77, 155, 1)), color-stop(100%, rgba(15, 54, 143, 1)));
-    background: -webkit-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
-    background: -o-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
-    background: linear-gradient(to bottom, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  color: #fff;
+  background: rgba(14, 45, 121, 1);
+  background: -moz-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(14, 45, 121, 1)), color-stop(21%, rgba(19, 94, 225, 1)), color-stop(51%, rgba(25, 90, 216, 1)), color-stop(76%, rgba(33, 77, 155, 1)), color-stop(100%, rgba(15, 54, 143, 1)));
+  background: -webkit-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+  background: -o-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+  background: linear-gradient(to bottom, rgba(14, 45, 121, 1) 0%, rgba(19, 94, 225, 1) 21%, rgba(25, 90, 216, 1) 51%, rgba(33, 77, 155, 1) 76%, rgba(15, 54, 143, 1) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .wrap {
-    height: 100%;
-    min-height: 100%;
-    height: auto;
-    /* Negative indent footer by its height */
-    margin: 0 auto -75px;
-    /* Pad bottom by footer height */
-    padding: 0 0 50px;
+  height: 100%;
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -75px;
+  /* Pad bottom by footer height */
+  padding: 0 0 50px;
 }
 
 a {
-    color: #67E3FC;
+  color: #67E3FC;
 }
 
 html, body {
-    height: 100%;
+  height: 100%;
 }
 
 .footer {
-    height: 100px;
-    margin-top: 24px;
+  height: 100px;
+  margin-top: 24px;
 }
 
 .btn-success {
-    background-color: rgba(19, 94, 225, 1);
-    border-color: rgba(15, 54, 143, 1);
+  background-color: rgba(19, 94, 225, 1);
+  border-color: rgba(15, 54, 143, 1);
 }
 
 .btn-success:focus,
 .btn-success:active,
 .btn-success.active {
-    background-color: rgba(19, 94, 225, 1) ;
-    border-color: rgba(19, 94, 225, 1) ;
+  background-color: rgba(19, 94, 225, 1) ;
+  border-color: rgba(19, 94, 225, 1) ;
 }
 
 .btn-success:hover {
-    background-color: rgba(19, 94, 225, 1) ;
-    border-color: rgba(19, 94, 225, 1) ;
+  background-color: rgba(19, 94, 225, 1) ;
+  border-color: rgba(19, 94, 225, 1) ;
 }
 
 .btn-success.disabled,
@@ -71,20 +71,20 @@ fieldset[disabled] .btn-success.focus,
 fieldset[disabled] .btn-success:active,
 fieldset[disabled] .btn-success:focus,
 fieldset[disabled] .btn-success:hover  {
-    background-color: rgba(14, 45, 121, 1);
-    border-color: rgba(14, 45, 121, 1);
+  background-color: rgba(14, 45, 121, 1);
+  border-color: rgba(14, 45, 121, 1);
 }
 
 .text-danger {
-    color: #FFA700;
+  color: #FFA700;
 }
 
 .text-success {
-    color: #67E3FC;
+  color: #67E3FC;
 }
 
 .tool {
-    color : #fff;
+  color : #fff;
 }
 
 .ct-grid {
@@ -93,6 +93,7 @@ fieldset[disabled] .btn-success:hover  {
 
 .ct-label {
   color: white;
+  font-size: 10px;
 }
 
 .ct-series-a .ct-line {
@@ -103,4 +104,32 @@ fieldset[disabled] .btn-success:hover  {
 .ct-series-a .ct-point {
   stroke: #6de3fa;
   stroke-width: 20px;
+}
+
+.status {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.status .panel-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #fff;
+  padding: 20px;
+}
+
+.panel-transparent {
+  background: none;
+}
+
+.panel-transparent .panel-heading {
+  background: rgba(122, 130, 136, 0.2)!important;
+}
+
+.panel-transparent .panel-body {
+  background: rgba(46, 51, 56, 0.2)!important;
+}
+
+.panel-default .panel-heading {
+  color: white;
 }

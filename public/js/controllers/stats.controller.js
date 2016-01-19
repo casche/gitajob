@@ -45,6 +45,10 @@ angular.module('app')
     });
 
     $http.get('gitjobs/lifespan').then(function(response) {
-      $scope.averageLifeSpan = moment.duration(response.data[0].averageLifeSpan, "milliseconds").format("W[W:]D[D:]H[H]");
+      $scope.averageLifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
+    });
+
+    $http.get('gitjobs/engineerlifespan').then(function(response) {
+      $scope.engineerlifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
     });
 }]);

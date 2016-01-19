@@ -41,7 +41,19 @@ exports.aggregate = function(req, res) {
   } else if (a === 'lifespan') {
     GitJob.aggregate([
       { $project: { title: 1, lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } },
-      { $group: { _id: null, averageLifeSpan: { $avg: "$lifespan"}}}
+      { $group: { _id: null, averageLifespan: { $avg: "$lifespan"}}}
+    ]).exec(function(err, result) {
+      if (err) {
+        return res.status(400).send({});
+      } else {
+        res.jsonp(result);
+      }
+    });
+  } else if ( a === 'engineerlifespan') {
+    GitJob.aggregate([
+      { $match: { title: /.*Engineer*/}},
+      { $project: { lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } },
+      { $group: { _id : null, averageLifespan: { $avg: "$lifespan" }}} 
     ]).exec(function(err, result) {
       if (err) {
         return res.status(400).send({});

@@ -57,6 +57,7 @@ angular.module('app')
 
     Q.all([remoteCount, notRemoteCount]).then(function(data) {
       new Chartist.Pie('#ct-pie', {
+        labels: ['Remote', 'Not Remote'],
         series: [data[0].data[0].count, data[1].data[0].count]
       });
     });

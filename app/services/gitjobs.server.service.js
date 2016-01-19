@@ -126,5 +126,29 @@ exports.aggregateCount = function(req, res) {
           res.jsonp(result);
         }
       });
+  } else if (a === 'engineer') {
+    GitJob
+      .aggregate([
+        { $match: { $or: [ { title: /.*engineer.*/}, { title: /.*Engineer.*/ }, { title: /.*Scientist.*/ }, { title: /.*scientist.*/ }]} },
+        { $group : { _id: null, count: { $sum: 1 }} }])
+      .exec(function(err, result) {
+        if (err) {
+          return res.status(400).send({});
+        } else {
+          res.jsonp(result);
+        }
+      });
+  } else if (a === 'notengineer') {
+    GitJob
+      .aggregate([
+        { $match: { $nor: [ { title: /.*engineer.*/}, { title: /.*Engineer.*/ }, { title: /.*Scientist.*/ }, { title: /.*scientist.*/ }]} },
+        { $group : { _id: null, count: { $sum: 1 }} }])
+      .exec(function(err, result) {
+        if (err) {
+          return res.status(400).send({});
+        } else {
+          res.jsonp(result);
+        }
+      });
   }
 };

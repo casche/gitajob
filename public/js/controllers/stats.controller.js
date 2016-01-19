@@ -51,11 +51,20 @@ angular.module('app')
     $http.get('gitjobs/engineerlifespan').then(function(response) {
       $scope.engineerlifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
     });
-    
+
     Q.all([$http.get('gitjobs/remote/count'), $http.get('gitjobs/notremote/count')]).then(function(data) {
       new Chartist.Pie('#ct-pie', {
         labels: ['Remote', 'Not Remote'],
         series: [data[0].data[0].count, data[1].data[0].count]
+      });
+    });
+
+    Q.all([$http.get('gitjobs/engineer/count'), $http.get('gitjobs/notengineer/count')]).then(function(data) {
+      new Chartist.Pie('#ct-pie2', {
+        labels: ['Engineer', 'Not Engineer'],
+        series: [data[0].data[0].count, data[1].data[0].count]
+      }, {
+        donut: true
       });
     });
 }]);

@@ -145,3 +145,11 @@ padding: 50px;
 .three {
   padding: 50px;
 }
+
+.ct-series-b .ct-area, .ct-series-b .ct-slice-pie {
+  fill: #72E3F8;
+}
+
+.ct-series-a .ct-area, .ct-series-a .ct-slice-pie {
+  fill: #7F9BF9;
+}

@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+// I noticed some of the jobs did not have their details filled in. This script will update
+// existing jobs that have no title field.
+
+'use strict';
+
+var C = (require('../config/env/' + (process.env.NODE_ENV || 'development') + '.js')).server;
+var M = require('mongoose');
+var GitHubJobSite = require('./github/github.jobsite.js');
+var GitHubJobs = require('./github/github.jobs.js');
+var GitHubJob = M.model('GitJob');
+
+M.connect(C.db);
+M.connection.on('error', console.error.bind(console, 'connection error:'));
+M.connection.once('open', function() {
+  GitHubJob.aggregate([
+      { $match: { title: "" }},
+      { $group: { _id: null, urls: { $push: '$url'} }
+    }]).exec(function(err, results) {
+    GitHubJobs.getJobsFromUrls(results[0].urls)
+      .then(GitHubJobs.updateJobFields)
+      .then(function() {
+        M.connection.close();
+      });
+  });
+});

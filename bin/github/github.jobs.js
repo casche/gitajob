@@ -14,6 +14,15 @@ module.exports = (function() {
       return Q.all(promises);
     },
 
+    getJobsFromUrls: function(urls) {
+      var promises = [];
+      urls.forEach(function(url) {
+        promises.push(GitHubJobSite.html(url));
+      });
+
+      return Q.all(promises);
+    },
+
     updateJobs: function(jobs) {
       var p = [];
       jobs.forEach(function(job) {
@@ -34,6 +43,15 @@ module.exports = (function() {
       });
 
       return Q.all(promises);
+    },
+
+    updateJobFields: function(jobs) {
+      var p = [];
+      jobs.forEach(function(job) {
+        p.push(Job.updateJobFields(job));
+      });
+
+      return Q.all(p);
     }
   };
 })();

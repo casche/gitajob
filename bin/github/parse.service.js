@@ -22,7 +22,7 @@ module.exports = (function() {
 
     job: function(jobUrl, html) {
       var $ = cheerio.load(html);
-      return {
+      return  {
         url: jobUrl,
         title: $('.posting-headline h2').text(),
         location: $('.posting-headline .posting-categories .sort-by-time').text(),

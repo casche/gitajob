@@ -153,3 +153,9 @@ padding: 50px;
 .ct-series-a .ct-area, .ct-series-a .ct-slice-pie {
   fill: #7F9BF9;
 }
+
+.fixed-panel {
+   min-height: 200px;
+   padding: 50px;
+   overflow-y: scroll;
+ }

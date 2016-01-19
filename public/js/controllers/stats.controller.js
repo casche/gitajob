@@ -45,11 +45,11 @@ angular.module('app')
     });
 
     $http.get('gitjobs/lifespan').then(function(response) {
-      $scope.averageLifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
+      $scope.averageLifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[w:]D[d:]H[h]");
     });
 
     $http.get('gitjobs/engineerlifespan').then(function(response) {
-      $scope.engineerlifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[W:]D[D:]H[H]");
+      $scope.engineerlifespan = moment.duration(response.data[0].averageLifespan, "milliseconds").format("W[w:]D[d:]H[h]");
     });
 
     Q.all([$http.get('gitjobs/remote/count'), $http.get('gitjobs/notremote/count')]).then(function(data) {

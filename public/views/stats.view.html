@@ -7,9 +7,9 @@
     <div class="col-md-3">
       <div class="panel status panel-default panel-transparent">
         <div class="panel-heading">
-          Average # of jobs available per day
+          Avg # of jobs available per day
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class="text-center">{{averageScrapes[0].count | number: 0}}</h1>
         </div>
       </div>
@@ -19,7 +19,7 @@
         <div class="panel-heading">
           Most jobs are posted on
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class="text-center">{{averageScrapesDayOfWeek[0]._id.dayOfWeek | date: 'EEEE'}}'s</h1>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="panel-heading">
           # of GitHub job crawls
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class="text-center">{{scrapes.length}}</h1>
         </div>
       </div>
@@ -51,7 +51,7 @@
         <div class="panel-heading">
           Average lifespan of an open job
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class="text-center">{{averageLifespan}}</h1>
         </div>
       </div>
@@ -61,7 +61,7 @@
         <div class="panel-heading">
           Average lifespan of an open Engineering job
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class="text-center">{{engineerlifespan}}</h1>
         </div>
       </div>
@@ -77,7 +77,7 @@
         <div class="panel-heading">
           Longest living job, {{oldestAge}}
         </div>
-        <div class="panel-body text-center">
+        <div class="panel-body fixed-panel text-center">
           <h1 class=" text-center">{{oldest}}</h1>
         </div>
       </div>

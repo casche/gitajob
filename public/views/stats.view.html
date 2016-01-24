@@ -1,5 +1,5 @@
-<div class="section text-center" data-ng-init="find()">
-  <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row">
+<div class="section" data-ng-init="find()">
+  <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row text-center">
     <h1><i class="fa fa-github fa-5x"></i></h1>
     <h1>GitaJob Stats</h1>
   </div>
@@ -15,17 +15,29 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="panel status panel-default panel-transparent">
+      <div class="panel panel-default collapse-group">
         <div class="panel-heading">
-          Most jobs are posted on
+          <div style="padding: 10px">
+            <p>Most positions opened on</p>
+            <div class="text-center">
+              <a class="btn" class="btn" data-toggle="collapse"  data-target="#day-panel-body">
+                <h1>{{moment().isoWeekday(sumDayOfWeek[0]._id.day).format('dddd')}}'s</h1>
+              </a>
+            </div>
+            <p class="text-center">{{sumDayOfWeek[0].sum}} positions opened</p>
+          </div>
         </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class="text-center">{{averageScrapesDayOfWeek[0]._id.dayOfWeek | date: 'EEEE'}}'s</h1>
+        <div id="day-panel-body" class="panel-body text-center collapse">
+          <div style="padding: 10px">
+            <uib-progressbar ng-repeat="r in sumDayOfWeek" value="r.sum"  max="sumDayOfWeek[0].sum">
+              <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
+            </uib-progressbar>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="panel status panel-default panel-transparent">
+      <div class="panel panel-default panel-transparent">
         <div class="panel-heading">
           # of GitHub job crawls
         </div>
@@ -47,7 +59,7 @@
   </div>
   <div class="row three">
     <div class="col-md-6">
-      <div class="panel status panel-default panel-transparent">
+      <div class="panel panel-default panel-transparent">
         <div class="panel-heading">
           Average lifespan of an open job
         </div>
@@ -57,7 +69,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="panel status panel-default panel-transparent">
+      <div class="panel panel-default panel-transparent">
         <div class="panel-heading">
           Average lifespan of an open Engineering job
         </div>
@@ -73,7 +85,7 @@
       <div id="ct-pie" class="ct-perfect-fourth"></div>
     </div>
     <div class="col-md-4">
-      <div class="panel status panel-default panel-transparent">
+      <div class="panel panel-default panel-transparent">
         <div class="panel-heading">
           Longest living job, {{oldestAge}}
         </div>

@@ -110,28 +110,23 @@ fieldset[disabled] .btn-success:hover  {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.status .panel-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 60px;
-  font-weight: bold;
-  color: #fff;
-  padding: 20px;
-}
-
-.panel-transparent {
-  background: none;
-}
-
-.panel-transparent .panel-heading {
-  background: rgba(122, 130, 136, 0.2)!important;
-}
-
-.panel-transparent .panel-body {
-  background: rgba(46, 51, 56, 0.2)!important;
-}
-
 .panel-default .panel-heading {
   color: white;
+  background-color: #15439f;
+  border-radius: 0px;
+  border:0px;
+}
+
+.panel-default .panel-body {
+  color: white;
+  background-color: #15439f;
+  border-radius: 0px;
+  border:0px;
+}
+
+.panel {
+  border-radius: 0px;
+  border:0px;
 }
 
 .one {
@@ -139,7 +134,7 @@ fieldset[disabled] .btn-success:hover  {
 }
 
 .two {
-padding: 50px;
+  padding: 50px;
 }
 
 .three {
@@ -158,4 +153,14 @@ padding: 50px;
    min-height: 200px;
    padding: 50px;
    overflow-y: scroll;
+ }
+
+ .progress {
+   background-color: #B44C00;
+   -webkit-box-shadow: none;
+   box-shadow: none;
+ }
+
+ .progress-bar {
+   background-color: #FF7108;
  }

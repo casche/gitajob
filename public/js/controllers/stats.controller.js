@@ -4,11 +4,17 @@
 angular.module('app')
   .controller('StatsController', ['$scope', 'Scrapes', 'AverageScrapes', '$http',
    function($scope, Scrapes, AverageScrapes, $http) {
+    $scope.moment = moment;
+
     $scope.find = function() {
       $scope.scrapes = Scrapes.query();
       $scope.averageScrapes = AverageScrapes.query({aggregate: null});
       $scope.averageScrapesDayOfWeek =  AverageScrapes.query({aggregate: 'dayOfWeek'})
     };
+
+    $http.get('gitjobs/firstseen/count').then(function(response) {
+      $scope.sumDayOfWeek = response.data;
+    });
 
     $http.get('scrapes/chart/month').then(function(response) {
       console.log(response.data.series[0][0].x);

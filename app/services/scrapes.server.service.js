@@ -4,6 +4,16 @@ require('../models/scrape.server.model');
 var mongoose = require('mongoose');
 var Scrape = mongoose.model('Scrape');
 
+var getQueryResponseHandler = function(res) {
+  return function(err, response) {
+    if (err) {
+      return res.status(400).send({});
+    } else {
+      res.jsonp(response);
+    }
+  };
+};
+
 exports.create = function(url, count, done) {
   var newScrape = new Scrape();
   newScrape.url = url;
@@ -18,13 +28,7 @@ exports.create = function(url, count, done) {
 
 exports.list = function(req, res) {
   res.set('Content-Type', 'application/json');
-  Scrape.find({}).sort('-created').exec(function(err, scrapes) {
-    if (err) {
-      return res.status(400).send({});
-    } else {
-      res.jsonp(scrapes);
-    }
-  });
+  Scrape.find({}).sort('-created').exec(getQueryResponseHandler(res));
 };
 
 exports.chart = function(req, res) {
@@ -47,50 +51,31 @@ exports.chart = function(req, res) {
 
 exports.avg = function(req, res) {
   res.set('Content-Type', 'application/json');
-  Scrape.aggregate([{ $group: { _id : null , count: { $avg: "$count" }}}]).exec(function(err, r) {
-    if (err) {
-      return res.status(400).send({});
-    } else {
-      res.jsonp(r);
-    }
-  });
+  Scrape.aggregate([{ $group: { _id : null , count: { $avg: "$count" }}}]).exec(getQueryResponseHandler(res));
 };
 
 exports.avgAgg = function(req, res) {
   res.set('Content-Type', 'application/json');
   var a = req.params.aggregate;
   if (a === 'month') {
-    Scrape.aggregate([{ $group: { _id : { month: { $month: "$created"}} , count: { $avg: "$count" }}}, { $sort : { count : -1 } }]).exec(function(err, r) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(r);
-      }
-    });
+    Scrape.aggregate([
+        { $group: { _id : { month: { $month: "$created"}} , count: { $avg: "$count" }}},
+        { $sort : { count : -1 } }])
+      .exec(getQueryResponseHandler(res));
   } else if (a === 'dayOfWeek') {
-    Scrape.aggregate([{ $group: { _id : { dayOfWeek: { $dayOfWeek: "$created"}} , count: { $avg: "$count" }}}, { $sort : { count : -1 } }]).exec(function(err, r) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(r);
-      }
-    });
+    Scrape.aggregate([
+        { $group: { _id : { dayOfWeek: { $dayOfWeek: "$created"}} , count: { $avg: "$count" }}},
+        { $sort : { count : -1 } }])
+    .exec(getQueryResponseHandler(res));
   } else if (a === 'dayOfMonth') {
-    Scrape.aggregate([{ $group: { _id : { dayOfMonth: { $dayOfMonth: "$created"}} , count: { $avg: "$count" }}}, { $sort : { count : -1 } }]).exec(function(err, r) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(r);
-      }
-    });
+    Scrape.aggregate([
+      { $group: { _id : { dayOfMonth: { $dayOfMonth: "$created"}}, count: { $avg: "$count" }}},
+      { $sort : { count : -1 } }])
+    .exec(getQueryResponseHandler(res));
   } else if (a === 'dayOfYear') {
-    Scrape.aggregate([{ $group: { _id : { dayOfYear: { $dayOfYear: "$created"}} , count: { $avg: "$count" }}}, { $sort : { count : -1 } }]).exec(function(err, r) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(r);
-      }
-    });
+    Scrape.aggregate([
+      { $group: { _id : { dayOfYear: { $dayOfYear: "$created"}}, count: { $avg: "$count" }}},
+      { $sort : { count : -1 } }])
+    .exec(getQueryResponseHandler(res));
   }
-
 };

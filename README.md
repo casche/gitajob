@@ -16,12 +16,11 @@ See http://gitajob.ninja to sign up. View the dashboard @ http://gitajob.ninja/#
 
 ## Rest API
 
-
 ### Scrapes (Webcrawls)
 
 ``` /scrapes ``` A list of webcrawls of GitHub jobs in descending order.
 
-``` /scrapes/avg ``` Average number of open positions  as ``` count.
+``` /scrapes/avg ``` Average number of open positions  as `count`.
 
  ` /scrapes/avg/:aggregation` Average number of open positions where `:aggregation` is one of ` [month, dayOfMonth, dayOfWeek, dayOfYear]`.
 
@@ -49,4 +48,4 @@ See http://gitajob.ninja to sign up. View the dashboard @ http://gitajob.ninja/#
 
 `/gitjobs/:aggregate/list` Aggregated data as a list where `:aggregate` is one of `[lifespan]`
 
-* `lifespan` lists all jobs and their associated lifespan in milli seconds 
+* `lifespan` lists all jobs and their associated lifespan in milli seconds

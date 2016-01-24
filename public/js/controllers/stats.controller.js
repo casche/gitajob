@@ -4,24 +4,16 @@
 angular.module('app')
   .controller('StatsController', ['$scope', 'Scrapes', 'AverageScrapes', '$http',
    function($scope, Scrapes, AverageScrapes, $http) {
+    $scope.moment = moment;
+
     $scope.find = function() {
       $scope.scrapes = Scrapes.query();
       $scope.averageScrapes = AverageScrapes.query({aggregate: null});
       $scope.averageScrapesDayOfWeek =  AverageScrapes.query({aggregate: 'dayOfWeek'})
     };
 
-    $http.get('scrapes/chart/month').then(function(response) {
-      console.log(response.data.series[0][0].x);
-        new Chartist.Line('#ct-line', response.data, {
-          axisY: {
-            onlyInteger: true,
-          },
-          axisX: {
-            labelInterpolationFnc: function(value) {
-              return value.month + "/" + value.year;
-            }
-          }
-        });
+    $http.get('gitjobs/firstseen/count').then(function(response) {
+      $scope.sumDayOfWeek = response.data;
     });
 
     $http.get('gitjobs/location/chart').then(function(response) {
@@ -70,6 +62,33 @@ angular.module('app')
 
     $http.get('gitjobs/lifespan/list').then(function(response) {
       $scope.oldest = response.data[0].title;
-      $scope.oldestAge = moment.duration(response.data[0].lifespan, "milliseconds").format("D[d]");
+      $scope.oldestAge = moment.duration(response.data[0].lifespan, "milliseconds").format("D[ days]");
     });
+
+
+    $http.get('scrapes/chart/month').then(function(response) {
+      new Chartist.Line('#ct-line', response.data, {
+        axisY: {
+          onlyInteger: true,
+        },
+        axisX: {
+          labelInterpolationFnc: function(value) {
+            return value.month + "/" + value.year;
+          }
+        }
+      }).on('draw', function(data) {
+        if(data.type === 'line') {
+          data.element.animate({
+            opacity: {
+              begin: 0,
+              dur: 500,
+              from: 0,
+              to: 1
+            }
+          });
+        }
+      });
+
+    });
+
 }]);

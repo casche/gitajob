@@ -32,6 +32,7 @@ html, body {
 }
 
 .footer {
+  color: #fff;
   height: 100px;
   margin-top: 24px;
 }
@@ -110,40 +111,24 @@ fieldset[disabled] .btn-success:hover  {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.status .panel-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 60px;
-  font-weight: bold;
-  color: #fff;
-  padding: 20px;
-}
-
-.panel-transparent {
-  background: none;
-}
-
-.panel-transparent .panel-heading {
-  background: rgba(122, 130, 136, 0.2)!important;
-}
-
-.panel-transparent .panel-body {
-  background: rgba(46, 51, 56, 0.2)!important;
-}
-
 .panel-default .panel-heading {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
   color: white;
+  border:0px;
 }
 
-.one {
-  padding: 50px;
+.panel-default .panel-body {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
+  color: white;
+  border:0px;
 }
 
-.two {
-padding: 50px;
-}
-
-.three {
-  padding: 50px;
+.panel {
+  border:0px;
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);
 }
 
 .ct-series-b .ct-area, .ct-series-b .ct-slice-pie {
@@ -154,8 +139,19 @@ padding: 50px;
   fill: #7F9BF9;
 }
 
-.fixed-panel {
-   min-height: 200px;
-   padding: 50px;
-   overflow-y: scroll;
+ .progress {
+   background-color: #B44C00;
+   -webkit-box-shadow: none;
+   box-shadow: none;
  }
+
+ .progress-bar {
+   background-color: #FF7108;
+ }
+
+ .jumbotron {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);
+ }
+
+ .jumbotron { min-height: 300px; }

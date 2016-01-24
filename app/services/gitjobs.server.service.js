@@ -105,6 +105,10 @@ exports.aggregateCount = function(req, res) {
         { $match: { $nor: [ { title: /.*engineer.*/}, { title: /.*Engineer.*/ }, { title: /.*Scientist.*/ }, { title: /.*scientist.*/ }]} },
         { $group : { _id: null, count: { $sum: 1 }} }])
       .exec(getQueryResponseHandler(res));
+  } else if (a === 'firstseen') {
+    GitJob
+      .aggregate([  {$group: { _id: { day: {$dayOfWeek: "$firstSeen"}}, sum: { $sum: 1 } }}, { $sort : { "sum" : -1} } ])
+      .exec(getQueryResponseHandler(res));
   }
 };
 

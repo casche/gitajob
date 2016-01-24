@@ -14,6 +14,8 @@ See http://gitajob.ninja to sign up. View the dashboard @ http://gitajob.ninja/#
 
 ## Rest API
 
+Interested in the raw data? Please see the following REST API. 
+
 ### Scrapes (Webcrawls)
 
 ``` /scrapes ``` A list of webcrawls of GitHub jobs in descending order.

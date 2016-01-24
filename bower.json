@@ -25,6 +25,7 @@
     "bootstrap": "~3.3.4",
     "chartist": "~0.9.5",
     "font-awesome": "*",
+    "moment": "~2.11.1",
     "moment-duration-format": "~1.3.0",
     "octicons": "~2.2.2",
     "q": "1.0.1"

@@ -32,6 +32,7 @@ html, body {
 }
 
 .footer {
+  color: #fff;
   height: 100px;
   margin-top: 24px;
 }
@@ -111,34 +112,23 @@ fieldset[disabled] .btn-success:hover  {
 }
 
 .panel-default .panel-heading {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
   color: white;
-  background-color: #15439f;
-  border-radius: 0px;
   border:0px;
 }
 
 .panel-default .panel-body {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
   color: white;
-  background-color: #15439f;
-  border-radius: 0px;
   border:0px;
 }
 
 .panel {
-  border-radius: 0px;
   border:0px;
-}
-
-.one {
-  padding: 50px;
-}
-
-.two {
-  padding: 50px;
-}
-
-.three {
-  padding: 50px;
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);
 }
 
 .ct-series-b .ct-area, .ct-series-b .ct-slice-pie {
@@ -149,12 +139,6 @@ fieldset[disabled] .btn-success:hover  {
   fill: #7F9BF9;
 }
 
-.fixed-panel {
-   min-height: 200px;
-   padding: 50px;
-   overflow-y: scroll;
- }
-
  .progress {
    background-color: #B44C00;
    -webkit-box-shadow: none;
@@ -164,3 +148,10 @@ fieldset[disabled] .btn-success:hover  {
  .progress-bar {
    background-color: #FF7108;
  }
+
+ .jumbotron {
+  background: rgb(25, 70, 157); /* This is for ie8 and below */
+  background: rgba(25, 70, 157, 0.2);
+ }
+
+ .jumbotron { min-height: 300px; }

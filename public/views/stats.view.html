@@ -1,33 +1,96 @@
 <div class="section" data-ng-init="find()">
-  <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row text-center">
-    <h1><i class="fa fa-github fa-5x"></i></h1>
+  <div class="jumbotron">
     <h1>GitaJob Stats</h1>
+    <h4>Curated with <i style="color:#FF0000" class="fa fa-heart fa-x"></i> since {{moment(scrapes[scrapes.length-1].created).format('MMMM Do YYYY')}}</h4>
   </div>
   <div class="row one">
-    <div class="col-md-3">
-      <div class="panel status panel-default panel-transparent">
-        <div class="panel-heading">
-          Avg # of jobs available per day
-        </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class="text-center">{{averageScrapes[0].count | number: 0}}</h1>
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body" style="padding:50px">
+          <div class="row">
+            <h2 class="text-center">Open jobs at GitHub</h2>
+            <div id="ct-line" class="ct-perfect-fourth"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="padding-top:25px">
+              <div class="text-center">
+                <strong> Avg # positions</strong>
+                <h2>{{averageScrapes[0].count | number: 0}}</h2>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center" style="padding-top:25px">
+                <strong># of GitHub crawls</strong>
+                <h2>{{scrapes.length}}</h2>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center" style="padding-top:25px">
+                <strong>Longest living position, {{oldestAge}}</strong>
+                <h2>{{oldest}}</h2>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-body text-center" style="padding:50px">
+            <div class="row">
+              <h2>Remote Jobs</h2>
+              <div id="ct-pie" class="ct-perfect-fourth"></div>
+            </div>
+            <div class="row">
+              <div class="text-center" style="padding-top:25px">
+                <strong>Average lifespan of a position</strong>
+                <h2 class="text-center">{{averageLifespan}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-body text-center" style="padding:50px">
+            <div class="row">
+              <h2>Engineering Jobs</h2>
+              <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
+            </div>
+            <div class="row">
+              <div class="text-center" style="padding-top:25px">
+                <strong>Average lifespan of a Engineering position</strong>
+                <h2 class="text-center">{{engineerlifespan}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body text-center">
+          <h2>Distribution of GitHub jobs</h2>
+          <div id="ct-bar" class="ct-perfect-fourth"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="panel panel-default collapse-group">
         <div class="panel-heading">
           <div style="padding: 10px">
             <p>Most positions opened on</p>
             <div class="text-center">
-              <a class="btn" class="btn" data-toggle="collapse"  data-target="#day-panel-body">
-                <h1>{{moment().isoWeekday(sumDayOfWeek[0]._id.day).format('dddd')}}'s</h1>
-              </a>
+              <h2>{{moment().isoWeekday(sumDayOfWeek[0]._id.day).format('dddd')}}'s</h2>
             </div>
             <p class="text-center">{{sumDayOfWeek[0].sum}} positions opened</p>
           </div>
         </div>
-        <div id="day-panel-body" class="panel-body text-center collapse">
+        <div id="day-panel-body" class="panel-body text-center">
           <div style="padding: 10px">
             <uib-progressbar ng-repeat="r in sumDayOfWeek" value="r.sum"  max="sumDayOfWeek[0].sum">
               <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
@@ -35,68 +98,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="panel panel-default panel-transparent">
-        <div class="panel-heading">
-          # of GitHub job crawls
-        </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class="text-center">{{scrapes.length}}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row two">
-    <div class="col-md-6">
-      <h1>Open jobs at GitHub</h1>
-      <div id="ct-line" class="ct-perfect-fourth"></div>
-    </div>
-    <div class="col-md-6">
-      <h1>Distribution of GitHub jobs</h1>
-      <div id="ct-bar" class="ct-perfect-fourth"></div>
-    </div>
-  </div>
-  <div class="row three">
-    <div class="col-md-6">
-      <div class="panel panel-default panel-transparent">
-        <div class="panel-heading">
-          Average lifespan of an open job
-        </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class="text-center">{{averageLifespan}}</h1>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-default panel-transparent">
-        <div class="panel-heading">
-          Average lifespan of an open Engineering job
-        </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class="text-center">{{engineerlifespan}}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row three">
-    <div class="col-md-4">
-      <h1>Remote Jobs</h1>
-      <div id="ct-pie" class="ct-perfect-fourth"></div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default panel-transparent">
-        <div class="panel-heading">
-          Longest living job, {{oldestAge}}
-        </div>
-        <div class="panel-body fixed-panel text-center">
-          <h1 class=" text-center">{{oldest}}</h1>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <h1>Engineering Jobs</h1>
-      <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
     </div>
   </div>
 </div>

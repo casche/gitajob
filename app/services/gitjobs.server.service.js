@@ -4,15 +4,19 @@ require('../models/scrape.server.model');
 var mongoose = require('mongoose');
 var GitJob = mongoose.model('GitJob');
 
-exports.list = function(req, res) {
-  res.set('Content-Type', 'application/json');
-  GitJob.find({}).exec(function(err, scrapes) {
+var getQueryResponseHandler = function(res) {
+  return function(err, response) {
     if (err) {
       return res.status(400).send({});
     } else {
-      res.jsonp(scrapes);
+      res.jsonp(response);
     }
-  });
+  };
+};
+
+exports.list = function(req, res) {
+  res.set('Content-Type', 'application/json');
+  GitJob.find({}).exec(getQueryResponseHandler(res));
 };
 
 exports.aggregate = function(req, res) {
@@ -21,52 +25,42 @@ exports.aggregate = function(req, res) {
   if (a === 'location') {
     GitJob
       .aggregate({ $group: { _id: "$location", count: { $sum: 1 } }})
-      .exec(function(err, scrapes) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(scrapes);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   } else if (a === 'remote') {
     GitJob.find({
-     $or: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]
-     }).exec(function(err, scrapes) {
-       if (err) {
-         return res.status(400).send({});
-       } else {
-         res.jsonp(scrapes);
-       }
-     });
+       $or: [ { location: /.*Remote.*/},
+          { location: /.*remote.*/ },
+          { location: /.*Anywhere.*/ },
+          { location: /.*anywhere.*/ }]
+    }).exec(getQueryResponseHandler(res));
   } else if (a === 'lifespan') {
     GitJob.aggregate([
-      { $project: { title: 1, lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } },
-      { $group: { _id: null, averageLifespan: { $avg: "$lifespan"}}}
-    ]).exec(function(err, result) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(result);
-      }
-    });
+      { $project: { title: 1, lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] }} },
+      { $group: { _id: null, averageLifespan: { $avg: "$lifespan"}} }
+    ]).exec(getQueryResponseHandler(res));
   } else if ( a === 'engineerlifespan') {
     GitJob.aggregate([
       { $match: { title: /.*Engineer*/}},
       { $project: { lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } },
       { $group: { _id : null, averageLifespan: { $avg: "$lifespan" }}}
-    ]).exec(function(err, result) {
-      if (err) {
-        return res.status(400).send({});
-      } else {
-        res.jsonp(result);
-      }
-    });
+    ]).exec(getQueryResponseHandler(res));
   }
 };
 
 exports.chart = function(req, res) {
   res.set('Content-Type', 'application/json');
   var a = req.params.aggregate;
+  var handler = function(err, jobs) {
+    if (err) {
+      return res.status(400).send({});
+    } else {
+      res.jsonp({
+        series: jobs[0].data,
+        labels: jobs[0].labels
+      });
+    }
+  }
+
   if (a === 'location') {
     GitJob
       .aggregate([
@@ -76,26 +70,11 @@ exports.chart = function(req, res) {
         { $limit : 10 },
         { $group: { _id: null, labels: { $push: "$_id"}, data: {  $push: "$count"}}}
       ])
-      .exec(function(err, jobs) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp({
-            series: jobs[0].data,
-            labels: jobs[0].labels
-          });
-        }
-      });
+      .exec(handler);
   } else if (a === 'remote') {
     GitJob.find({
      $or: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]
-     }).exec(function(err, scrapes) {
-       if (err) {
-         return res.status(400).send({});
-       } else {
-         res.jsonp(scrapes);
-       }
-     });
+   }).exec(handler);
   }
 };
 
@@ -107,49 +86,25 @@ exports.aggregateCount = function(req, res) {
       .aggregate([
         { $match: { $or: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]} },
         { $group : { _id: null, count: { $sum: 1 }} }])
-      .exec(function(err, result) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(result);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   } else if (a === 'notremote') {
     GitJob
       .aggregate([
         { $match: { $nor: [ { location: /.*Remote.*/}, { location: /.*remote.*/ }, { location: /.*Anywhere.*/ }, { location: /.*anywhere.*/ }]} },
         { $group : { _id: null, count: { $sum: 1 }} }])
-      .exec(function(err, result) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(result);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   } else if (a === 'engineer') {
     GitJob
       .aggregate([
         { $match: { $or: [ { title: /.*engineer.*/}, { title: /.*Engineer.*/ }, { title: /.*Scientist.*/ }, { title: /.*scientist.*/ }]} },
         { $group : { _id: null, count: { $sum: 1 }} }])
-      .exec(function(err, result) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(result);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   } else if (a === 'notengineer') {
     GitJob
       .aggregate([
         { $match: { $nor: [ { title: /.*engineer.*/}, { title: /.*Engineer.*/ }, { title: /.*Scientist.*/ }, { title: /.*scientist.*/ }]} },
         { $group : { _id: null, count: { $sum: 1 }} }])
-      .exec(function(err, result) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(result);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   }
 };
 
@@ -159,12 +114,6 @@ exports.aggregateList = function(req, res) {
   if (a === 'lifespan') {
     GitJob
       .aggregate( [ { $project: { title: 1, lifespan: { $subtract: [ "$lastSeen", "$firstSeen" ] } } }, { $sort : { lifespan: -1}}  ] )
-      .exec(function(err, result) {
-        if (err) {
-          return res.status(400).send({});
-        } else {
-          res.jsonp(result);
-        }
-      });
+      .exec(getQueryResponseHandler(res));
   }
 }

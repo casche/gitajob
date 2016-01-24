@@ -3,7 +3,6 @@ angular.module('appRoutes', [])
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider
-      // index
       .when('/', {
         templateUrl: 'views/main.view.html',
         controller: 'MainController'
@@ -11,7 +10,9 @@ angular.module('appRoutes', [])
       .when('/unsubscribe', {
         templateUrl: 'views/unsubscribe.view.html',
         controller: 'UnsubscribeController'
+      })
+      .when('/stats', {
+        templateUrl: 'views/stats.view.html',
+        controller: 'StatsController'
       });
-
-    $locationProvider.html5Mode(true).hashPrefix('!');
   }]);

@@ -4,5 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 router.all('/scrapes', Scrapes.list);
+router.all('/scrapes/chart/month', Scrapes.chart);
+router.all('/scrapes/avg', Scrapes.avg);
+router.all('/scrapes/avg/:aggregate', Scrapes.avgAgg);
 
 module.exports = router;

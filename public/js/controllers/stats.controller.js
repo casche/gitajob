@@ -16,20 +16,6 @@ angular.module('app')
       $scope.sumDayOfWeek = response.data;
     });
 
-    $http.get('scrapes/chart/month').then(function(response) {
-      console.log(response.data.series[0][0].x);
-        new Chartist.Line('#ct-line', response.data, {
-          axisY: {
-            onlyInteger: true,
-          },
-          axisX: {
-            labelInterpolationFnc: function(value) {
-              return value.month + "/" + value.year;
-            }
-          }
-        });
-    });
-
     $http.get('gitjobs/location/chart').then(function(response) {
       new Chartist.Bar('#ct-bar', response.data, {
         distributeSeries: true,
@@ -78,4 +64,31 @@ angular.module('app')
       $scope.oldest = response.data[0].title;
       $scope.oldestAge = moment.duration(response.data[0].lifespan, "milliseconds").format("D[ days]");
     });
+
+
+    $http.get('scrapes/chart/month').then(function(response) {
+      new Chartist.Line('#ct-line', response.data, {
+        axisY: {
+          onlyInteger: true,
+        },
+        axisX: {
+          labelInterpolationFnc: function(value) {
+            return value.month + "/" + value.year;
+          }
+        }
+      }).on('draw', function(data) {
+        if(data.type === 'line') {
+          data.element.animate({
+            opacity: {
+              begin: 0,
+              dur: 500,
+              from: 0,
+              to: 1
+            }
+          });
+        }
+      });
+
+    });
+
 }]);

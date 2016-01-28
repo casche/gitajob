@@ -1,100 +1,93 @@
 <div class="section" data-ng-init="find()">
   <div class="jumbotron">
     <h1>GitaJob Stats</h1>
-    <h4>Curated with <i style="color:#FF0000" class="fa fa-heart fa-x"></i> since {{moment(scrapes[scrapes.length-1].created).format('MMMM Do YYYY')}}</h4>
+    <h4>Curated with <i class="fa fa-heart fa-x red">
+      </i> since {{moment(scrapes[scrapes.length-1].created).format('MMMM Do YYYY')}}
+    </h4>
   </div>
-  <div class="row one">
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-body" style="padding:50px">
-          <div class="row">
-            <h2 class="text-center">Open jobs at GitHub</h2>
-            <div id="ct-line" class="ct-perfect-fourth"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-4" style="padding-top:25px">
-              <div class="text-center">
-                <strong> Avg # positions</strong>
-                <h2>{{averageScrapes[0].count | number: 0}}</h2>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="text-center" style="padding-top:25px">
-                <strong># of GitHub crawls</strong>
-                <h2>{{scrapes.length}}</h2>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="text-center" style="padding-top:25px">
-                <strong>Longest living position, {{oldestAge}}</strong>
-                <h2>{{oldest}}</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-body text-center" style="padding:50px">
-            <div class="row">
-              <h2>Remote Jobs</h2>
-              <div id="ct-pie" class="ct-perfect-fourth"></div>
-            </div>
-            <div class="row">
-              <div class="text-center" style="padding-top:25px">
-                <strong>Average lifespan of a position</strong>
-                <h2 class="text-center">{{averageLifespan}}</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-body text-center" style="padding:50px">
-            <div class="row">
-              <h2>Engineering Jobs</h2>
-              <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
-            </div>
-            <div class="row">
-              <div class="text-center" style="padding-top:25px">
-                <strong>Average lifespan of a Engineering position</strong>
-                <h2 class="text-center">{{engineerlifespan}}</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-</div>
   <div class="row">
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-body text-center">
-          <h2>Distribution of GitHub jobs</h2>
-          <div id="ct-bar" class="ct-perfect-fourth"></div>
+    <div class="col-lg-8">
+      <div class="widget">
+        <h2 class="text-center ct-title">Open Positions at <span class="mega-octicon octicon-mention standout"></span>
+          <span class="mega-octicon octicon-logo-github"></span></h2>
+        <div id="ct-line" class="ct-perfect-fourth"></div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="widget">
+        <div class="row" style="margin-top:40px">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <span class="w-title"> Avg <i class="fa fa-hashtag"></i> of open positions</span>
+              <p class="w-value light-orange">{{averageScrapes[0].count | number: 0}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:40px">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <span class="w-title"><i class="fa fa-hashtag"></i> of <span class="octicon octicon-logo-github"> crawls</span>
+              <p class="w-value light-orange">{{scrapes.length}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:40px">
+          <div class="col-lg-12">
+            <div class=" text-center">
+              <i class="fa fa-clock-o"></i> <span class="w-title">Longest living position, <span class="standout">{{oldestAge}}</span></span>
+              <p class="w-value light-orange">{{oldest}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="panel panel-default collapse-group">
-        <div class="panel-heading">
-          <div style="padding: 10px">
-            <p>Most positions opened on</p>
+  </div>
+  <div class="row">
+    <div class="col-lg-4" style="margin-top:40px">
+      <div class="widget text-center">
+        <h3 class="w-title" style="margin-bottom:24px">Remote Positions</h3>
+        <div id="ct-pie" class="ct-perfect-fourth"></div>
+      </div>
+    </div>
+    <div class="col-lg-4" style="margin-top:40px">
+      <div class="widget text-center">
+        <h3 class="w-title" style="margin-bottom:24px">Engineering Positions</h3>
+        <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
+      </div>
+    </div>
+    <div class="col-lg-4" style="margin-top:40px">
+      <div class="widget text-center">
+        <h3 class="w-title" style="margin-bottom:24px">Most positions opened on</h3>
+        <uib-progressbar ng-repeat="r in sumDayOfWeek" ng-if="r.sum > 2" value="r.sum"  max="sumDayOfWeek[0].sum">
+          <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
+         </uib-progressbar>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8" style="margin-top:40px">
+      <div class="widget">
+        <h2 class="text-center ct-title">Top 5 Locations of Positions <span class="mega-octicon octicon-mention standout"></span>
+          <span class="mega-octicon octicon-logo-github"></span></h2>
+        <div id="ct-bar" class="ct-perfect-fourth"></div>
+      </div>
+    </div>
+    <div class="col-lg-4" style="margin-top:40px">
+      <div class="widget">
+        <div class="row" style="margin-top:40px">
+          <div class="col-lg-12">
             <div class="text-center">
-              <h2>{{moment().isoWeekday(sumDayOfWeek[0]._id.day).format('dddd')}}'s</h2>
+              <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a Engineering position</span>
+              <p class="w-value light-orange">{{engineerlifespan}}</p>
             </div>
-            <p class="text-center">{{sumDayOfWeek[0].sum}} positions opened</p>
           </div>
         </div>
-        <div id="day-panel-body" class="panel-body text-center">
-          <div style="padding: 10px">
-            <uib-progressbar ng-repeat="r in sumDayOfWeek" value="r.sum"  max="sumDayOfWeek[0].sum">
-              <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
-            </uib-progressbar>
+        <div class="row" style="margin-top:40px">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a position</span>
+              <p class="w-value light-orange">{{averageLifespan}}</p>
+            </div>
           </div>
         </div>
       </div>

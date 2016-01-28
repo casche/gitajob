@@ -67,7 +67,7 @@ exports.chart = function(req, res) {
         { $group: { _id: "$location", count: { $sum: 1 } } },
         { $sort: { count: -1 }},
         { $match: {_id: { $ne: "" }} },
-        { $limit : 10 },
+        { $limit : 5 },
         { $group: { _id: null, labels: { $push: "$_id"}, data: {  $push: "$count"}}}
       ])
       .exec(handler);

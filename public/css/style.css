@@ -94,39 +94,36 @@ fieldset[disabled] .btn-success:hover  {
 
 .ct-label {
   color: white;
-  font-size: 10px;
+  font-size: 16px;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+text.ct-label {
+  color: white;
+  font-size: 12px;
+  fill: white;
+  font-style:italic;
 }
 
 .ct-series-a .ct-line {
-  stroke: #6de3fa;
+  stroke: #FFD372;
   stroke-width: 5px;
 }
 
 .ct-series-a .ct-point {
-  stroke: #6de3fa;
+  stroke: #FFD372;
   stroke-width: 20px;
 }
 
-.status {
-  font-family: 'Source Sans Pro', sans-serif;
+.ct-chart-line .ct-label.ct-horizontal.ct-end {
+    transform: translate(-50%,0);
+    display: block;
+    text-align: center;
 }
 
-.panel-default .panel-heading {
-  background: rgb(25, 70, 157); /* This is for ie8 and below */
-  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
+.widget {
+  padding:50px;
   color: white;
-  border:0px;
-}
-
-.panel-default .panel-body {
-  background: rgb(25, 70, 157); /* This is for ie8 and below */
-  background: rgba(25, 70, 157, 0.2);   border-radius: 0px;
-  color: white;
-  border:0px;
-}
-
-.panel {
-  border:0px;
   background: rgb(25, 70, 157); /* This is for ie8 and below */
   background: rgba(25, 70, 157, 0.2);
 }
@@ -139,7 +136,7 @@ fieldset[disabled] .btn-success:hover  {
   fill: #7F9BF9;
 }
 
- .progress {
+.progress {
    background-color: #B44C00;
    -webkit-box-shadow: none;
    box-shadow: none;
@@ -150,8 +147,47 @@ fieldset[disabled] .btn-success:hover  {
  }
 
  .jumbotron {
-  background: rgb(25, 70, 157); /* This is for ie8 and below */
-  background: rgba(25, 70, 157, 0.2);
+   background: rgb(25, 70, 157); /* This is for ie8 and below */
+   background: rgba(25, 70, 157, 0.2);
+   margin-top: 25px;
  }
 
- .jumbotron { min-height: 300px; }
+.ct-title {
+   margin-bottom: 25px;
+   font-family: Tahoma, Geneva, sans-serif;
+ }
+
+.w-title {
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.w-value {
+  font-weight: 100;
+  font-size: 3em;
+  font-family: ‘Arial Narrow’, sans-serif;
+}
+
+.light-blue {
+  color: #7F9CF9;
+}
+
+.light-peach {
+  color: #FFD372;
+}
+
+.light-orange {
+  color: #FFB772;
+}
+
+.red {
+  color:#FF0000;
+}
+
+.aqua {
+  color: #72e3f8;
+}
+
+.standout {
+  font-weight: bold;
+  color: #72e3f8;
+}

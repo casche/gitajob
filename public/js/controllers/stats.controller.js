@@ -21,18 +21,16 @@ angular.module('app')
         distributeSeries: true,
          seriesBarDistance: 20,
          axisX: {
-           labelOffset: {
-             x: 0,
-             y: 0
-           },
-           showGrid: false,
-           labelInterpolationFnc: Chartist.noop,
-           scaleMinSpace: 300,
+           showGrid: false
          },
          axisY: {
-           onlyInteger: true
+           onlyInteger: true,
+           showGrid: false,
+           labelInterpolationFnc: function(value, index) {
+             return index % 2 === 0 ? value : '';
+           }
          },
-         high: 60,
+         high: 60
       });
     });
 
@@ -69,12 +67,18 @@ angular.module('app')
     $http.get('scrapes/chart/month').then(function(response) {
       new Chartist.Line('#ct-line', response.data, {
         axisY: {
+          labelInterpolationFnc: function(value, index) {
+            return index % 2 === 0 ? value : '';
+          },
           onlyInteger: true,
+          showGrid: false
         },
         axisX: {
-          labelInterpolationFnc: function(value) {
-            return value.month + "/" + value.year;
-          }
+          labelInterpolationFnc: function(value, index) {
+            var d = moment('' + value.month + '-' + value.year, 'MM-YYYY');
+            return index % 2 === 0 ? d.format('MMM YY') : '';
+          },
+          showGrid: false
         }
       }).on('draw', function(data) {
         if(data.type === 'line') {

@@ -5,17 +5,17 @@
       </i> since {{moment(scrapes[scrapes.length-1].created).format('MMMM Do YYYY')}}
     </h4>
   </div>
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="widget">
+  <div class="row row-eq-height">
+    <div class="col-lg-8 widget">
+      <div>
         <h2 class="text-center ct-title">Open Positions at <span class="mega-octicon octicon-mention standout"></span>
           <span class="mega-octicon octicon-logo-github"></span></h2>
         <div id="ct-line" class="ct-perfect-fourth"></div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="widget">
-        <div class="row" style="margin-top:40px">
+    <div class="col-lg-4 widget">
+      <div>
+        <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
               <span class="w-title"> Avg <i class="fa fa-hashtag"></i> of open positions</span>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="row" style="margin-top:40px">
+        <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
               <span class="w-title"><i class="fa fa-hashtag"></i> of <span class="octicon octicon-logo-github"> crawls</span>
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="row" style="margin-top:40px">
+        <div class="row">
           <div class="col-lg-12">
             <div class=" text-center">
               <i class="fa fa-clock-o"></i> <span class="w-title">Longest living position, <span class="standout">{{oldestAge}}</span></span>
@@ -42,21 +42,21 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-4" style="margin-top:40px">
-      <div class="widget text-center">
+  <div class="row row-eq-height">
+    <div class="col-lg-4 widget">
+      <div class="text-center">
         <h3 class="w-title" style="margin-bottom:24px">Remote Positions</h3>
         <div id="ct-pie" class="ct-perfect-fourth"></div>
       </div>
     </div>
-    <div class="col-lg-4" style="margin-top:40px">
-      <div class="widget text-center">
+    <div class="col-lg-4 widget">
+      <div class="text-center">
         <h3 class="w-title" style="margin-bottom:24px">Engineering Positions</h3>
         <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
       </div>
     </div>
-    <div class="col-lg-4" style="margin-top:40px">
-      <div class="widget text-center">
+    <div class="col-lg-4 widget">
+      <div class="text-center">
         <h3 class="w-title" style="margin-bottom:24px">Most positions opened on</h3>
         <uib-progressbar ng-repeat="r in sumDayOfWeek" ng-if="r.sum > 2" value="r.sum"  max="sumDayOfWeek[0].sum">
           <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
@@ -64,17 +64,17 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-8" style="margin-top:40px">
-      <div class="widget">
+  <div class="row row-eq-height">
+    <div class="col-lg-8 widget">
+      <div>
         <h2 class="text-center ct-title">Top 5 Locations of Positions <span class="mega-octicon octicon-mention standout"></span>
           <span class="mega-octicon octicon-logo-github"></span></h2>
         <div id="ct-bar" class="ct-perfect-fourth"></div>
       </div>
     </div>
-    <div class="col-lg-4" style="margin-top:40px">
-      <div class="widget">
-        <div class="row" style="margin-top:40px">
+    <div class="col-lg-4 widget">
+      <div>
+        <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
               <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a Engineering position</span>
@@ -82,7 +82,7 @@
             </div>
           </div>
         </div>
-        <div class="row" style="margin-top:40px">
+        <div class="row">
           <div class="col-lg-12">
             <div class="text-center">
               <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a position</span>

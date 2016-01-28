@@ -191,3 +191,17 @@ text.ct-label {
   font-weight: bold;
   color: #72e3f8;
 }
+
+@media (min-height: 768px) {
+    .row-eq-height {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.row .widget {
+  margin:12px;
+}

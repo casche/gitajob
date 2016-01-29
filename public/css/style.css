@@ -122,11 +122,13 @@ text.ct-label {
 }
 
 .widget {
-  padding:50px;
+  padding:36px;
   color: white;
   background: rgb(25, 70, 157); /* This is for ie8 and below */
   background: rgba(25, 70, 157, 0.2);
+  border: 12px solid rgba(255,255,255,.05);
 }
+
 
 .ct-series-b .ct-area, .ct-series-b .ct-slice-pie {
   fill: #72E3F8;
@@ -149,11 +151,13 @@ text.ct-label {
  .jumbotron {
    background: rgb(25, 70, 157); /* This is for ie8 and below */
    background: rgba(25, 70, 157, 0.2);
-   margin-top: 25px;
+   margin-top: 24px;
+   margin-bottom:12px;
  }
 
 .ct-title {
-   margin-bottom: 25px;
+   margin-bottom: 24px;
+   font-size: 24px;
    font-family: Tahoma, Geneva, sans-serif;
  }
 
@@ -192,16 +196,12 @@ text.ct-label {
   color: #72e3f8;
 }
 
-@media (min-height: 768px) {
-    .row-eq-height {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        flex-direction: row;
-    }
-}
-
-.row .widget {
-  margin:12px;
+@media (min-width: 768px) {
+  .row-eq-height {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      flex-direction: row;
+  }
 }

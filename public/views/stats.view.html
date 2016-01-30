@@ -7,88 +7,90 @@
   </div>
   <div class="row row-eq-height text-center container-fluid">
     <div class="col-md-8 widget">
-      <div class="sub-widget">
-        <div class="">
-          <span class="ct-title">Open Positions at <span class="mega-octicon octicon-mention standout"></span>
-            <span class="mega-octicon octicon-logo-github"></span></span  >
-          <div id="ct-line" class="ct-perfect-fourth"></div>
+      <div>
+        <span class="ct-title">Open Positions at
+          <span class="mega-octicon octicon-mention standout"></span>
+          <span class="mega-octicon octicon-logo-github"></span>
+        </span>
       </div>
-      </div>
+      <div style="margin-top:64px" id="ct-line" class="ct-perfect-fourth"></div>
     </div>
     <div class="col-md-4 text-center widget">
       <div class="sub-widget">
         <div class="row">
           <div class="col-md-12">
-            <div>
+            <div class="inset">
               <span class="w-title"> Avg <i class="fa fa-hashtag"></i> of open positions</span>
-              <p class="w-value light-orange">{{averageScrapes[0].count | number: 0}}</p>
+              <p style="margin-top:24px" class="w-value light-orange">{{averageScrapes[0].count | number: 0}}</p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <div>
+            <div class="inset">
               <span class="w-title"><i class="fa fa-hashtag"></i> of <span class="octicon octicon-logo-github"> crawls</span>
-              <p class="w-value light-orange">{{scrapes.length}}</p>
+              <p style="margin-top:24px" class="w-value light-orange">{{scrapes.length}}</p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <div class=" text-center">
+            <div class="inset">
               <i class="fa fa-clock-o"></i> <span class="w-title">Longest living position, <span class="standout">{{oldestAge}}</span></span>
-              <p class="w-value light-orange">{{oldest}}</p>
+              <p style="margin-top:24px" class="w-value light-orange">{{oldest}}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row row-eq-height container-fluid">
+  <div class="row row-eq-height container-fluid text-center">
     <div class="col-md-4 widget">
-      <div class="text-center">
-        <span class="w-title" style="margin-bottom:24px">Remote Positions</span>
-        <div id="ct-pie" class="ct-perfect-fourth"></div>
+      <div class="">
+        <span class="w-title">Remote Positions</span>
+        <div id="ct-pie" style="margin-top:24px" class="ct-perfect-fourth"></div>
       </div>
     </div>
     <div class="col-md-4 widget">
-      <div class="text-center">
-        <span class="w-title" style="margin-bottom:24px">Engineering Positions</span>
-        <div id="ct-pie2" class="inverse ct-perfect-fourth"></div>
+      <div class="">
+        <span class="w-title">Engineering Positions</span>
+        <div id="ct-pie2" style="margin-top:24px" class="inverse ct-perfect-fourth"></div>
       </div>
     </div>
     <div class="col-md-4 widget">
-      <div class="text-center">
-        <span class="w-title" style="margin-bottom:24px">Most positions opened on</span>
-        <uib-progressbar ng-repeat="r in sumDayOfWeek" ng-if="r.sum > 2" value="r.sum"  max="sumDayOfWeek[0].sum">
-          <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
-         </uib-progressbar>
+      <div class="">
+        <span class="w-title">Most positions opened on</span>
+        <div class="inset">
+          <uib-progressbar ng-repeat="r in sumDayOfWeek" ng-if="r.sum > 2" value="r.sum"  max="sumDayOfWeek[0].sum">
+            <i>{{moment().isoWeekday(r._id.day).format('dddd')}} {{r.sum}}</i>
+          </uib-progressbar>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row row-eq-height container-fluid">
+  <div class="row row-eq-height container-fluid text-center">
     <div class="col-md-8 widget">
       <div>
         <span class="text-center ct-title">Top 5 Locations of Positions <span class="mega-octicon octicon-mention standout"></span>
           <span class="mega-octicon octicon-logo-github"></span></span>
-        <div id="ct-bar" class="ct-perfect-fourth"></div>
+        <div id="ct-bar" style="margin-top:64px" class="ct-perfect-fourth"></div>
       </div>
     </div>
     <div class="col-md-4 widget">
       <div>
         <div class="row">
           <div class="col-md-12">
-            <div class="text-center">
+            <div class="inset">
               <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a Engineering position</span>
-              <p class="w-value light-orange">{{engineerlifespan}}</p>
+              <p style="margin-top:24px" class="w-value light-orange">{{engineerlifespan}}</p>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <div class="text-center">
+            <div class="inset">
               <i class="fa fa-clock-o"></i> <span class="w-title">Average lifespan of a position</span>
-              <p class="w-value light-orange">{{averageLifespan}}</p>
+              <p style="margin-top:24px" class="w-value light-orange">{{averageLifespan}}</p>
             </div>
           </div>
         </div>

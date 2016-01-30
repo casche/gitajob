@@ -196,6 +196,10 @@ text.ct-label {
   color: #72e3f8;
 }
 
+.inset {
+  padding:36px;
+}
+
 @media (min-width: 768px) {
   .row-eq-height {
       display: -webkit-box;

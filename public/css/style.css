@@ -209,3 +209,19 @@ text.ct-label {
       flex-direction: row;
   }
 }
+
+.ct-bar {
+  stroke-width: 20px;
+}
+
+@media (min-width: 480px) {
+  .ct-bar {
+    stroke-width: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ct-bar {
+    stroke-width: 40px;
+  }
+}

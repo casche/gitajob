@@ -1,9 +1,9 @@
 <div class="section text-center" data-ng-init="find()">
   <div style="padding-top:50px; padding-right:50px; padding-left:50px" class="row">
-    <h1><i class="fa fa-github fa-5x"></i></h1>
+    <h1 style="font-size:64px; margin-bottom:40px">GitaJob.ninja</h1>
     <h1><a class="tool" uib-tooltip="{{scrapes[0].created | date}}">Last we checked</a>, there were <a target="_blank"
         href="{{scrapes[0].url}}">{{scrapes[0].count}}
-      jobs</a> at GitHub</h1>
+      jobs</a> at <span class="mega-octicon octicon-logo-github"></span></h1>
   </div>
   <div class="row">
     <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8  col-xs-offset-2 col-xs-8">
@@ -25,5 +25,9 @@
       <p style="margin-top: 24px" ng-show="error" class="text-danger text-center">{{error}}.</p>
       <p style="margin-top: 48px">Would you like to <a ng-href="#/unsubscribe">unsubscribe</a>?</p>
     </div>
+  </div>
+  <div class="row">
+      <h3 style="margin-top: 48px">Interested in our <span class="mega-octicon octicon-logo-github"></span>
+          <a ng-href="#/stats">job statistics</a>?</h3>
   </div>
 </div>

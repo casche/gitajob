@@ -200,12 +200,28 @@ text.ct-label {
   padding:36px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .row-eq-height {
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       flex-direction: row;
+  }
+}
+
+.ct-bar {
+  stroke-width: 20px;
+}
+
+@media (min-width: 480px) {
+  .ct-bar {
+    stroke-width: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ct-bar {
+    stroke-width: 40px;
   }
 }

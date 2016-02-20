@@ -17,7 +17,7 @@ angular.module('app')
     });
 
     $http.get('gitjobs/location/chart').then(function(response) {
-      new Chartist.Bar('#ct-bar', response.data, {
+      new Chartist.Bar('.ct-bar', response.data, {
         distributeSeries: true,
          seriesBarDistance: 20,
          axisX: {

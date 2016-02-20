@@ -2,7 +2,7 @@
 
 A dashboard & email notifier for jobs at GitHub. Uses Heroku one-off dyno's to crawl the GitHub job site for jobs. Emails subscribers if and and only if there are new open positions at GitHub. Compiles a number of stats on a dashboard.
 
-See http://gitajob.ninja to sign up. View the dashboard @ http://gitajob.ninja/#/status
+See http://www.gitajob.ninja to sign up. View the dashboard @ http://www.gitajob.ninja/#/stats
 
 ## Usage
 

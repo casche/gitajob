@@ -15,6 +15,7 @@ function hasJobs(jobs) {
 
 function mailJobs(jobs, subject) {
   console.log('Sending mail to ' + config.server.mailer.subscriberList);
+  console.log(jobs);
   mailgun.messages().send({
     from: config.server.mailer.from,
     to: config.server.mailer.subscriberList,

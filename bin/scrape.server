@@ -7,12 +7,13 @@ var M = require('mongoose');
 var GitHubJobSite = require('./github/github.jobsite.js');
 var GitHubJobs = require('./github/github.jobs.js');
 var Mailer = require('../app/services/mailer.server.service.js');
-var GitHubJobSite = require('./github.jobsite.js');
 
 M.connect(C.db);
 M.connection.on('error', console.error.bind(console, 'connection error:'));
 M.connection.once('open', function() {
   GitHubJobSite.html(C.jobUrl)
+    .then(GitHubJobs.getJobUrls)
+    .then(GitHubJobs.createScrape)
     .then(GitHubJobs.getJobs)
     .then(GitHubJobs.resolveExistence)
     .then(GitHubJobs.updateJobs)

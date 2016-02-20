@@ -200,7 +200,7 @@ text.ct-label {
   padding:36px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .row-eq-height {
       display: -webkit-box;
       display: -webkit-flex;
